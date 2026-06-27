@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1620" font-family="Geist, Inter, system-ui, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#eaedf3" fill-opacity="0.55"/>
+    </marker>
+    <marker id="arrPink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff6bed"/>
+    </marker>
+    <marker id="arrCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6be3ff"/>
+    </marker>
+    <marker id="arrMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#eaedf3" fill-opacity="0.35"/>
+    </marker>
+    <style>
+      .box        { stroke-width: 2; rx: 10; ry: 10; }
+      .loop-box   { fill: rgba(255,107,237,0.10); stroke: #ff6bed; }
+      .neutral    { fill: #343f60; stroke: rgba(171,75,153,0.55); }
+      .session    { fill: rgba(138,51,123,0.35); stroke: #ff6bed; stroke-width: 2.5; }
+      .stop       { fill: rgba(255,107,237,0.22); stroke: #ff6bed; stroke-width: 2.5; }
+      .tool       { fill: #ff6bed; stroke: #ff6bed; }
+      .side       { fill: rgba(52,63,96,0.55); stroke: rgba(171,75,153,0.5); stroke-dasharray: 4 3; }
+
+      .label      { font-size: 18px; font-weight: 600; fill: #eaedf3; text-anchor: middle; }
+      .label-dark { font-size: 18px; font-weight: 700; fill: #212737; text-anchor: middle; }
+      .side-l     { font-size: 13px; font-weight: 700; fill: #eaedf3; text-anchor: middle; }
+      .side-sub   { font-size: 11px; font-weight: 400; fill: rgba(234,237,243,0.55); text-anchor: middle; }
+      .zone       { font-size: 14px; font-weight: 800; letter-spacing: 2px; }
+
+      .connector  { stroke: rgba(234,237,243,0.45); stroke-width: 2; fill: none; }
+      .side-link  { stroke: rgba(234,237,243,0.30); stroke-width: 1.5; stroke-dasharray: 4 3; fill: none; }
+
+      .loop-pink  { stroke: #ff6bed; stroke-width: 2.5; fill: none; }
+      .loop-cyan  { stroke: #6be3ff; stroke-width: 2.5; fill: none; }
+      .loop-faint { stroke: rgba(234,237,243,0.4); stroke-width: 2; fill: none; stroke-dasharray: 8 6; }
+    </style>
+  </defs>
+
+  <!-- Background — matches brand-bg -->
+  <rect width="1100" height="1620" fill="#212737"/>
+
+  <!-- ============================================ -->
+  <!-- LOOP CONTAINERS -->
+  <!-- ============================================ -->
+
+  <!-- Session loop: dashed faint, returning to Session Start -->
+  <path d="M 760 75 L 1020 75 L 1020 1410 L 760 1410"
+        class="loop-faint" marker-end="url(#arrMuted)"/>
+
+  <!-- Each-turn dashed cyan container -->
+  <rect x="370" y="135" width="430" height="1110" rx="14" ry="14"
+        fill="none" stroke="#6be3ff" stroke-opacity="0.7" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="395" y="1230" class="zone" fill="#6be3ff">EACH</text>
+  <text x="395" y="1248" class="zone" fill="#6be3ff">TURN</text>
+
+  <!-- Agentic loop dashed pink container -->
+  <rect x="395" y="265" width="380" height="820" rx="14" ry="14"
+        fill="none" stroke="#ff6bed" stroke-opacity="0.7" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="420" y="290" class="zone" fill="#ff6bed">AGENTIC</text>
+  <text x="420" y="308" class="zone" fill="#ff6bed">LOOP</text>
+
+  <!-- ============================================ -->
+  <!-- MAIN COLUMN BOXES -->
+  <!-- ============================================ -->
+
+  <rect x="440" y="40"   width="320" height="70" class="box session"/>
+  <text x="600" y="82"   class="label">Session Start</text>
+
+  <rect x="440" y="160"  width="320" height="70" class="box neutral"/>
+  <text x="600" y="202"  class="label">UserPromptSubmit</text>
+
+  <rect x="440" y="320"  width="320" height="70" class="box loop-box"/>
+  <text x="600" y="362"  class="label">PreToolUse</text>
+
+  <rect x="440" y="410"  width="320" height="70" class="box loop-box"/>
+  <text x="600" y="452"  class="label">PermissionRequest</text>
+
+  <rect x="440" y="500"  width="320" height="70" class="box tool"/>
+  <text x="600" y="542"  class="label-dark">[ tool executes ]</text>
+
+  <rect x="440" y="590"  width="320" height="70" class="box loop-box"/>
+  <text x="600" y="632"  class="label">PostToolUse / PostToolUseFailure</text>
+
+  <rect x="440" y="680"  width="320" height="70" class="box loop-box"/>
+  <text x="600" y="722"  class="label">PostToolBatch</text>
+
+  <rect x="440" y="770"  width="320" height="70" class="box loop-box"/>
+  <text x="600" y="812"  class="label">SubagentStart / SubagentStop</text>
+
+  <rect x="440" y="860"  width="320" height="70" class="box loop-box"/>
+  <text x="600" y="902"  class="label">TaskCreated</text>
+
+  <rect x="440" y="990"  width="320" height="70" class="box loop-box"/>
+  <text x="600" y="1032" class="label">TaskCompleted</text>
+
+  <rect x="440" y="1160" width="320" height="70" class="box stop"/>
+  <text x="600" y="1202" class="label">Stop / StopFailure</text>
+
+  <rect x="440" y="1290" width="320" height="70" class="box neutral"/>
+  <text x="600" y="1332" class="label">TeammateIdle</text>
+
+  <rect x="440" y="1380" width="320" height="70" class="box neutral"/>
+  <text x="600" y="1422" class="label">PreCompact</text>
+
+  <!-- ============================================ -->
+  <!-- VERTICAL CONNECTOR ARROWS -->
+  <!-- ============================================ -->
+  <line x1="600" y1="110"  x2="600" y2="155"  class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="230"  x2="600" y2="315"  class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="390"  x2="600" y2="405"  class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="480"  x2="600" y2="495"  class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="570"  x2="600" y2="585"  class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="660"  x2="600" y2="675"  class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="750"  x2="600" y2="765"  class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="840"  x2="600" y2="855"  class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="930"  x2="600" y2="985"  class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="1060" x2="600" y2="1155" class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="1230" x2="600" y2="1285" class="connector" marker-end="url(#arr)"/>
+  <line x1="600" y1="1360" x2="600" y2="1375" class="connector" marker-end="url(#arr)"/>
+
+  <!-- ============================================ -->
+  <!-- LOOP-BACK ARROWS -->
+  <!-- ============================================ -->
+
+  <!-- Agentic Loop: TaskCompleted -> PreToolUse -->
+  <path d="M 760 1025 L 830 1025 L 830 355 L 760 355"
+        class="loop-pink" marker-end="url(#arrPink)"/>
+
+  <!-- Each Turn: Stop -> UserPromptSubmit -->
+  <path d="M 760 1195 L 880 1195 L 880 195 L 760 195"
+        class="loop-cyan" marker-end="url(#arrCyan)"/>
+
+  <!-- ============================================ -->
+  <!-- SIDE HOOKS — DASHED -->
+  <!-- ============================================ -->
+
+  <rect x="80" y="40" width="240" height="70" class="box side"/>
+  <text x="200" y="72" class="side-l">Setup</text>
+  <text x="200" y="92" class="side-sub">(Opt-in)</text>
+  <line x1="320" y1="75" x2="435" y2="75" class="side-link" marker-end="url(#arrMuted)"/>
+
+  <rect x="80" y="160" width="240" height="70" class="box side"/>
+  <text x="200" y="190" class="side-l">UserPrompt Expansion</text>
+  <text x="200" y="210" class="side-sub">(slash commands)</text>
+  <line x1="440" y1="195" x2="320" y2="195" class="side-link" marker-end="url(#arrMuted)"/>
+
+  <rect x="80" y="410" width="240" height="70" class="box side"/>
+  <text x="200" y="440" class="side-l">Permission Denied</text>
+  <text x="200" y="460" class="side-sub">(auto-mode deny)</text>
+  <line x1="440" y1="445" x2="320" y2="445" class="side-link" marker-end="url(#arrMuted)"/>
+
+  <rect x="80" y="500" width="240" height="70" class="box side"/>
+  <text x="200" y="530" class="side-l">Elicitation</text>
+  <text x="200" y="550" class="side-sub">(MCP input)</text>
+  <line x1="320" y1="535" x2="435" y2="535" class="side-link" marker-end="url(#arrMuted)"/>
+
+  <rect x="80" y="590" width="240" height="70" class="box side"/>
+  <text x="200" y="620" class="side-l">ElicitationResult</text>
+  <text x="200" y="640" class="side-sub">(MCP input)</text>
+  <line x1="320" y1="625" x2="435" y2="625" class="side-link" marker-end="url(#arrMuted)"/>
+
+  <rect x="80" y="1160" width="240" height="70" class="box side"/>
+  <text x="200" y="1190" class="side-l">Notification</text>
+  <text x="200" y="1210" class="side-sub">(Async)</text>
+  <line x1="440" y1="1195" x2="320" y2="1195" class="side-link" marker-end="url(#arrMuted)"/>
+
+  <rect x="80" y="1290" width="240" height="70" class="box side"/>
+  <text x="200" y="1320" class="side-l">ConfigChange</text>
+  <text x="200" y="1340" class="side-sub">(Async)</text>
+  <line x1="440" y1="1325" x2="320" y2="1325" class="side-link" marker-end="url(#arrMuted)"/>
+
+  <rect x="80" y="1380" width="240" height="70" class="box side"/>
+  <text x="200" y="1410" class="side-l">WorktreeCreate</text>
+  <text x="200" y="1430" class="side-sub">(Isolation)</text>
+  <line x1="440" y1="1415" x2="320" y2="1415" class="side-link" marker-end="url(#arrMuted)"/>
+
+  <rect x="80" y="1500" width="240" height="70" class="box side"/>
+  <text x="200" y="1530" class="side-l">WorktreeRemove</text>
+  <text x="200" y="1550" class="side-sub">(Isolation)</text>
+
+</svg>
