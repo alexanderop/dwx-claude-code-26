@@ -2053,7 +2053,80 @@ pass, THEN the agent opens the app, runs the change, screenshots it, reads the
 console. If anything's wrong, it goes back. This is the click-through-by-hand
 step, automated — and it's what killed my fear.
 
-TRANSITION: So here's the tool that makes the "open the app" step real.
+TRANSITION: But a user clicks at random. A QA engineer works from a ticket.
+-->
+
+---
+transition: fade-out
+---
+
+# Aim it like a QA engineer — from a ticket
+
+<div class="text-center text-sm op-60 mb-6">A QA engineer never hears "test the app." They get a <strong style="color:#ff6bed">ticket</strong> — and they do two jobs with it.</div>
+
+<div class="grid grid-cols-[0.82fr_1.18fr] gap-7 items-stretch max-w-6xl mx-auto">
+
+<Card variant="muted">
+<div class="text-xs uppercase tracking-wide op-50 mb-2">The ticket · the contract</div>
+<div class="text-base font-semibold mb-1">#142 · Auto-start rest timer</div>
+<div class="text-xs op-70 mb-4">Resume an in-progress workout; rest countdown starts on its own.</div>
+<div class="text-xs op-50 mb-1">Acceptance criteria</div>
+<div class="text-xs op-85 leading-relaxed">
+  <div>AC1 · resume restores the in-progress workout</div>
+  <div>AC2 · rest countdown auto-starts on log-set</div>
+  <div>AC3 · footer shows <code>Rest m:ss</code>, counting down</div>
+  <div class="op-50 mt-1">… 7 criteria total</div>
+</div>
+</Card>
+
+<div class="grid grid-rows-2 gap-4">
+
+<Card glow>
+<div class="text-xs uppercase tracking-wide op-50 mb-1">Job 1 · Verify the criteria</div>
+<div class="text-xl font-bold">Walk every AC in the live app.</div>
+<div class="text-sm op-75 mt-2">Did AC2 <em>actually</em> happen in a real browser? Pass / fail, with a screenshot. A checklist, not a vibe.</div>
+</Card>
+
+<Card glow>
+<div class="text-xs uppercase tracking-wide op-50 mb-1">Job 2 · Explore</div>
+<div class="text-xl font-bold">Poke at what the ticket never mentioned.</div>
+<div class="text-sm op-75 mt-2">"Simultaneous learning, test design, and execution." The bug <em>no</em> acceptance criterion would ever catch.</div>
+</Card>
+
+</div>
+
+</div>
+
+<div class="absolute bottom-4 right-8 text-xs op-40">alexop.dev/posts/exploratory-qa-ai-agents-site-agnostic-harness</div>
+
+<!--
+[breathe]
+
+Before any tooling — what are we actually asking the agent to be? Not "a user
+who clicks around." A QA engineer. And a QA engineer never gets "test the app."
+They get a TICKET — and they do two distinct jobs with it.
+
+LEFT — the ticket is the contract. Ticket #142: resume a workout, auto-start the
+rest timer. Underneath, the acceptance criteria — the explicit checklist.
+This is where the "7 acceptance criteria" you'll see in a minute COME FROM. Not
+invented by the agent. Read off the ticket, like a real engineer would.
+
+RIGHT — two jobs, and they're different.
+JOB 1, verify the criteria: walk every AC against the LIVE app. Did AC2 actually
+happen in a real browser? Pass or fail, with a screenshot. Deterministic. A
+checklist.
+JOB 2, explore: this is the one scripted E2E can never do. The textbook
+definition — exploratory testing is "simultaneous learning, test design, and
+test execution," all at once. The agent wanders like a first-day QA hire and
+finds the bug nobody wrote a criterion for. On otto.de, Codex found a filter
+button sitting on a panel with zero products — a consistency bug no AC would
+ever cover.
+
+Hold both jobs in your head. Everything in this act is one or the other:
+agent-browser is the hands, dogfood is Job 2, the PR proof is Job 1, and the
+label-triggered pipeline runs both.
+
+TRANSITION: First, the hands — the tool that lets it act at all.
 -->
 
 ---
@@ -2156,6 +2229,8 @@ transition: fade-out
 
 <div>
 
+<div class="text-xs uppercase tracking-wide op-50 mb-2" style="color:#ff6bed">Job 2 · Explore</div>
+
 <div class="text-2xl font-bold leading-tight mb-5">
 Vercel had the right instinct:<br/>
 dogfood the preview like a real user.
@@ -2163,7 +2238,8 @@ dogfood the preview like a real user.
 
 <div class="text-lg op-75 leading-snug mb-6">
 The <code>dogfood</code> skill turns one URL into an exploratory QA pass:
-navigate, click, type, resize, inspect the console, and save repro evidence.
+navigate, click, type, resize, inspect the console, and save repro evidence —
+no acceptance criterion required.
 </div>
 
 <a href="https://github.com/alexanderop/dogfood-qa" class="text-sm font-mono" style="color:#ff6bed">
@@ -2339,6 +2415,8 @@ transition: fade-out
 
 # Proof: the agent QA'd a PR by itself
 
+<div class="text-center text-xs uppercase tracking-wide op-50 mb-3"><span style="color:#ff6bed">Job 1 · Verify the criteria</span> — ticket #142, checked against the live app</div>
+
 <div class="grid grid-cols-2 gap-6 mt-4">
 
 <div>
@@ -2374,13 +2452,14 @@ Verdict: MINOR_ISSUES   ·   2026-04-12
 </div>
 
 <!--
-Not hypothetical — a real run from the workout tracker.
+Not hypothetical — a real run from the workout tracker. And this is ticket #142
+from a few slides back — the auto-start rest timer. Job 1, made real.
 
-I handed an agent a PR — "auto-start the rest timer, resume an in-progress
-workout" — and let it QA itself with agent-browser. 70 turns, about ten and a
-half minutes. It checked all seven acceptance criteria against the LIVE app and
-found two genuine bugs: a copy bug ("with 0 blocks" when the template had one)
-and a missing role=timer for screen readers.
+I handed an agent the PR and let it QA itself with agent-browser. 70 turns, about
+ten and a half minutes. It checked all seven acceptance criteria FROM THE TICKET
+against the LIVE app — and going beyond them (Job 2), found two genuine bugs: a
+copy bug ("with 0 blocks" when the template had one) and a missing role=timer for
+screen readers. Neither was in the ACs. That's the exploration paying off.
 
 It wrote qa-report.md and a machine-readable verdict. "Types passing isn't
 shipping; working in a browser is" — here's the agent proving exactly that.
@@ -2526,39 +2605,61 @@ TRANSITION: With those three pieces, the GitHub Action becomes almost boring.
 transition: fade-out
 ---
 
-# Now put the same run in GitHub Actions
+# The trigger is a label
 
-<div class="text-center text-sm op-70 mb-5">The same local command becomes unattended PR feedback.</div>
+<div class="text-center text-sm op-70 mb-4">You don't QA every commit. You add a <code style="color:#ff6bed">qa</code> label to the PR — the pipeline wakes up.</div>
+
+<div class="flex items-center justify-center gap-2 text-xs op-70 mb-5 flex-wrap">
+  <span class="px-2 py-1 rounded bg-white/5">Ticket + ACs</span>
+  <span style="color:#ff6bed">→</span>
+  <span class="px-2 py-1 rounded" style="background:rgba(255,107,237,.15);color:#ff6bed">add <code>qa</code> label</span>
+  <span style="color:#ff6bed">→</span>
+  <span class="px-2 py-1 rounded bg-white/5">Action fires</span>
+  <span style="color:#ff6bed">→</span>
+  <span class="px-2 py-1 rounded bg-white/5">verify ACs + explore</span>
+  <span style="color:#ff6bed">→</span>
+  <span class="px-2 py-1 rounded bg-white/5">PR comment</span>
+</div>
 
 ```yaml
-on: pull_request
+on:
+  pull_request:
+    types: [labeled]                        # ← fires when a label is added
 
-steps:
-  - run: npm i -g agent-browser @anthropic-ai/claude-code
-  - run: agent-browser install
-  - run: claude -p "$QA_PROMPT" ...
-  - run: gh pr comment "$PR" --body-file qa-report.json
+jobs:
+  qa:
+    if: github.event.label.name == 'qa'     # only the qa label, nothing else
+    steps:
+      - run: npm i -g agent-browser @anthropic-ai/claude-code
+      - run: agent-browser install
+      - run: ACS=$(gh issue view "$TICKET" --json body -q .body)   # ← the acceptance criteria
+      - run: claude -p "Verify these criteria, then explore: $ACS" ...
+      - run: gh pr comment "$PR" --body-file qa-report.json
 ```
-
-<div class="mt-6 max-w-3xl mx-auto">
-<Card variant="muted">
-<div class="text-base text-center leading-snug">
-Every PR gets the same browser QA pass: open preview, navigate, check console, post the report.
-</div>
-</Card>
-</div>
 
 <div class="absolute bottom-12 right-8 text-xs op-40">alexop.dev/posts/automated-qa-claude-code-agent-browser-cli-github-actions</div>
 
 <!--
-Now the full workflow is easy to explain.
+Here's the trigger — and it's the whole point.
 
-On every pull request, install Claude Code, install agent-browser, run the same
-`claude -p` QA prompt, and post the structured report back to the PR.
+You do NOT run a ten-minute browser agent on every commit. That's slow and
+expensive. Instead it's opt-in: when a PR is ready for a real QA pass, you add
+one label — `qa`. Adding the label is the human saying "this one's worth it."
 
-The details live in the blog post: the actual schema, the longer prompt, the
-exact `jq` extraction. The slide does not need to carry all of that. The slide
-needs the mental model: local QA command, lifted into CI, producing a PR comment.
+The YAML: `on: pull_request, types: [labeled]` means the workflow fires the
+moment a label lands. The `if` guard checks it's actually the `qa` label and not
+some other tag. Then: install agent-browser and Claude Code; pull the acceptance
+criteria straight off the linked ticket with `gh issue view` — that's the
+`$ACS` line, the contract made literal; feed them into the `claude -p` prompt
+("verify these, THEN explore"); and post the structured report back as a PR
+comment. The ACs aren't vibes — they're text piped from the issue.
+
+So the flow on the strip up top: ticket with ACs, you add the label, the Action
+fires, the agent does both jobs — verify the ACs and explore — and you get a QA
+report on the PR. Like having a QA engineer you summon with a label.
+
+The schema, the longer prompt, the exact jq — all in the blog post. The slide
+just needs the mental model: a label summons a QA engineer.
 
 TRANSITION: But this is still a signal, not a human replacement.
 -->
