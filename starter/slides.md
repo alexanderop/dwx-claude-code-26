@@ -3305,6 +3305,164 @@ thing that sends them.
 
 (The factory comes later — that's a different idea. Loops are one part of it.)
 
+TRANSITION: Take the two middle rungs up close — Loop first.
+-->
+
+---
+transition: fade-out
+clicks: 4
+---
+
+# A loop runs the cycle without me
+
+<div class="text-center text-sm op-60 -mt-2 mb-6">Workout tracker — encode the work-check-fix cycle once, let it re-send itself.</div>
+
+```bash
+/loop check the open PR on the workout tracker. If CI is red, pull the
+failing log and push a minimal fix. If new review comments arrived,
+address each one. If it's green and quiet, say so in one line.
+```
+
+<div class="grid grid-cols-3 gap-4 mt-10">
+
+<div v-click>
+<Card variant="muted" size="sm">
+<div class="text-sm font-bold" style="color:#ff6bed">Re-sends itself</div>
+<div class="text-sm op-75 mt-1">Each iteration re-runs the prompt — the "continue" comes from the loop, not from me.</div>
+</Card>
+</div>
+
+<div v-click>
+<Card variant="muted" size="sm">
+<div class="text-sm font-bold" style="color:#ff6bed">Paces itself</div>
+<div class="text-sm op-75 mt-1">No interval given → Claude waits short while CI is hot, longer once the PR goes quiet.</div>
+</Card>
+</div>
+
+<div v-click>
+<Card variant="muted" size="sm">
+<div class="text-sm font-bold" style="color:#ff6bed">Runs open-ended</div>
+<div class="text-sm op-75 mt-1">No finish line — it babysits until I press <code>Esc</code>. That's the difference from a goal.</div>
+</Card>
+</div>
+
+</div>
+
+<div v-after class="text-center text-lg op-75 mt-10 max-w-4xl mx-auto">
+The prompt I'd retype every ten minutes — <strong style="color:#ff6bed">now the loop retypes it</strong>.
+</div>
+
+<!--
+First the "Loop" rung. One prompt is one request; a loop is that request,
+re-sent on its own.
+
+I type the cycle once: check the PR, fix red CI, answer review comments,
+report when it's quiet. That's loop engineering in one line — I've written the
+thing that prompts the agent, instead of prompting it myself.
+
+CLICK — Every iteration re-runs that prompt. The "continue" I used to type now
+comes from the loop.
+CLICK — I gave no interval, so it's self-paced — Claude waits a short beat while
+CI is finishing and stretches the gap once the PR goes quiet. Give it `5m` and
+it runs on a fixed cadence instead.
+CLICK — And notice what it does NOT have: a finish line. A loop runs open-ended
+until I press Esc. That's exactly the seam to the next rung —
+
+TRANSITION: a goal adds the finish line, so the loop can stop itself.
+-->
+
+---
+transition: fade-out
+clicks: 4
+---
+
+# A goal gives the loop a finish line
+
+<div class="text-center text-sm op-60 -mt-2 mb-6">Workout tracker — "raise test coverage by 5 points," then I walk away.</div>
+
+```bash
+/goal raise total test coverage on the workout tracker by at least 5
+points over the current baseline. Run `pnpm test:coverage`, print the
+new number, and only add or change test files — never touch app source.
+```
+
+<div class="grid grid-cols-3 gap-4 mt-10">
+
+<div v-click>
+<Card variant="muted" size="sm">
+<div class="text-sm font-bold" style="color:#ff6bed">Each turn</div>
+<div class="text-sm op-75 mt-1">Claude writes tests, runs <code>pnpm test:coverage</code>, the number lands in the transcript.</div>
+</Card>
+</div>
+
+<div v-click>
+<Card variant="muted" size="sm">
+<div class="text-sm font-bold" style="color:#ff6bed">A fast model checks</div>
+<div class="text-sm op-75 mt-1">Is coverage +5 yet? Not yet → it sends Claude back in with the reason. No "continue" from me.</div>
+</Card>
+</div>
+
+<div v-click>
+<Card variant="muted" size="sm">
+<div class="text-sm font-bold" style="color:#ff6bed">Hits +5 → clears</div>
+<div class="text-sm op-75 mt-1">Condition met, the goal ends itself. I come back to green tests and a higher number.</div>
+</Card>
+</div>
+
+</div>
+
+<div v-after class="text-center text-lg op-75 mt-10 max-w-4xl mx-auto">
+I didn't prompt every step — I set the <strong style="color:#ff6bed">finish line</strong> and let the loop run to it.
+</div>
+
+<!--
+This is the "Goal" rung, made concrete on the app we're building.
+
+I type one command: raise coverage by 5 points. Notice the shape of a good
+condition — one measurable end state (coverage +5), a stated check (run
+pnpm test:coverage and print the number), and a constraint that matters
+(only touch tests, never app source).
+
+CLICK — Every turn, Claude does the work and the coverage number lands in the
+conversation.
+CLICK — After the turn, a small fast model reads the transcript and asks one
+question: is the condition true yet? If not, it sends Claude back in with the
+reason — keep going. I never type "continue."
+CLICK — The moment coverage crosses +5, the goal clears itself automatically.
+
+CLICK — That's the whole point of the rung: I set the finish line once, and the
+loop runs to it without me. The evaluator only judges what Claude surfaces, so
+you write the condition as something the output can prove.
+
+TRANSITION: And the finish line doesn't have to be a number — Peter sets a fuzzy one.
+-->
+
+---
+layout: statement
+transition: fade-out
+---
+
+# A finish line can be a feeling
+
+<div class="flex justify-center mt-6">
+  <img src="/peter-steinberger-goal-tweet.png" alt="Peter Steinberger tweet: /goal refactor until you are happy with the architecture. ensure you live test after each significant step and autoreview/commit. track progress in /tmp/refactor-{projectname}.md" class="w-[80%] rounded-xl shadow-2xl" />
+</div>
+
+<div class="absolute bottom-4 right-8 text-xs op-40">x.com/steipete</div>
+
+<!--
+My coverage goal had a hard number. Peter's doesn't — and it still works.
+
+"/goal refactor until you are happy with the architecture." That's a fuzzy
+finish line, but look at what he wires around it so the evaluator has something
+to read: live test after each significant step, autoreview and commit, and
+track progress in a scratch markdown file. The loop leaves a trail, so each turn
+the checker can see real movement instead of vibes.
+
+That's the craft of the rung — even a soft condition becomes runnable once you
+tell the loop how to prove progress: tests run, commits land, the progress file
+grows. Then you walk away and it refactors until it's there.
+
 TRANSITION: In the product, this starts looking less like chat and more like
 an operating surface.
 -->
