@@ -1544,14 +1544,20 @@ TRANSITION: Layer 2 — lint and format. Fast enough to run on every keystroke.
 
 </div>
 
-<div v-click class="mt-6">
+<div v-click class="mt-3">
 
-```bash
-# Vite+ wraps both behind one CLI
-vp check     # type + lint + format
-vp test      # vitest
-vp build     # rolldown
-```
+<div class="text-center text-xs op-50 mb-1">Vite+ wraps both behind one CLI</div>
+
+<div class="max-w-lg mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+  <video
+    src="/vp-check.webm"
+    poster="/vp-check-poster.png"
+    autoplay
+    muted
+    playsinline
+    class="w-full block"
+  />
+</div>
 
 </div>
 
@@ -1564,7 +1570,11 @@ Oxlint's rule set is smaller but covers the high-value cases. Fast first pass;
 keep ESLint for the rules Oxlint doesn't ship yet.
 
 CLICK — Vite+ is VoidZero's unified toolchain. One CLI, one config, wrapping
-Vite, Rolldown, Vitest, Oxlint, Oxfmt, Tsdown.
+Vite, Rolldown, Vitest, Oxlint, Oxfmt, Tsdown. The clip shows it: vp check
+(format + lint + types), vp test, vp build — all green, all fast.
+
+(The clip is illustrative — real subcommands, representative file counts/timings.
+Source: recordings/vp.tape; re-render with `cd starter/recordings && vhs vp.tape`.)
 
 TRANSITION: Speed matters — but what you lint FOR matters more. Two Vue rules in particular.
 -->
@@ -2473,14 +2483,21 @@ transition: fade-out
 
 # First: `claude -p`
 
-<div class="text-center text-sm op-70 mb-8">Claude Code without the chat UI.</div>
+<div class="text-center text-sm op-70 mb-6">Claude Code without the chat UI.</div>
 
-```bash
-claude -p "Test this preview like a QA engineer" \
-  --allowedTools "Bash(agent-browser*)"
-```
+<div class="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+  <video
+    src="/claude-p.webm"
+    poster="/claude-p-poster.png"
+    autoplay
+    muted
+    playsinline
+    controls
+    class="w-full block"
+  />
+</div>
 
-<div class="mt-8 max-w-3xl mx-auto">
+<div class="mt-6 max-w-3xl mx-auto">
 <Card variant="muted">
 <div class="text-lg text-center leading-snug">
 One prompt in. One report out.<br/>
@@ -2504,7 +2521,13 @@ Actions can run it on a pull request.
 
 TRANSITION: But I don't want to give CI-Claude my whole machine. I want to give
 it exactly one useful tool.
+
+(PRODUCTION NOTE: the terminal clip is a condensed re-enactment of the real
+ticket-#142 QA run — real command, real numbers, real two bugs. Source is
+`recordings/claude-p.tape`; re-render with `cd starter/recordings && vhs
+claude-p.tape`. The .webm autoplays once on slide-enter.)
 -->
+
 
 ---
 transition: fade-out
@@ -3380,38 +3403,18 @@ clicks: 4
 
 <div class="text-center text-sm op-60 -mt-2 mb-6">Workout tracker — "raise test coverage by 5 points," then I walk away.</div>
 
-```bash
-/goal raise total test coverage on the workout tracker by at least 5
-points over the current baseline. Run `pnpm test:coverage`, print the
-new number, and only add or change test files — never touch app source.
-```
-
-<div class="grid grid-cols-3 gap-4 mt-10">
-
-<div v-click>
-<Card variant="muted" size="sm">
-<div class="text-sm font-bold" style="color:#ff6bed">Each turn</div>
-<div class="text-sm op-75 mt-1">Claude writes tests, runs <code>pnpm test:coverage</code>, the number lands in the transcript.</div>
-</Card>
+<div class="max-w-2xl mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+  <video
+    src="/goal.webm"
+    poster="/goal-poster.png"
+    autoplay
+    muted
+    playsinline
+    class="w-full block"
+  />
 </div>
 
-<div v-click>
-<Card variant="muted" size="sm">
-<div class="text-sm font-bold" style="color:#ff6bed">A fast model checks</div>
-<div class="text-sm op-75 mt-1">Is coverage +5 yet? Not yet → it sends Claude back in with the reason. No "continue" from me.</div>
-</Card>
-</div>
-
-<div v-click>
-<Card variant="muted" size="sm">
-<div class="text-sm font-bold" style="color:#ff6bed">Hits +5 → clears</div>
-<div class="text-sm op-75 mt-1">Condition met, the goal ends itself. I come back to green tests and a higher number.</div>
-</Card>
-</div>
-
-</div>
-
-<div v-after class="text-center text-lg op-75 mt-10 max-w-4xl mx-auto">
+<div class="text-center text-base op-70 mt-3 max-w-4xl mx-auto">
 I didn't prompt every step — I set the <strong style="color:#ff6bed">finish line</strong> and let the loop run to it.
 </div>
 
@@ -3423,16 +3426,20 @@ condition — one measurable end state (coverage +5), a stated check (run
 pnpm test:coverage and print the number), and a constraint that matters
 (only touch tests, never app source).
 
-CLICK — Every turn, Claude does the work and the coverage number lands in the
-conversation.
-CLICK — After the turn, a small fast model reads the transcript and asks one
-question: is the condition true yet? If not, it sends Claude back in with the
-reason — keep going. I never type "continue."
-CLICK — The moment coverage crosses +5, the goal clears itself automatically.
+Watch the clip — it's the rung in motion. Every turn Claude writes tests and the
+coverage number lands in the transcript. After each turn a small fast model reads
+it and asks one question: is the condition true yet? Not yet → it sends Claude
+back in with the reason. I never type "continue." The moment line coverage crosses
++5, the goal clears itself.
 
-CLICK — That's the whole point of the rung: I set the finish line once, and the
-loop runs to it without me. The evaluator only judges what Claude surfaces, so
-you write the condition as something the output can prove.
+(The numbers in the clip — 81.2% → 86.2% statement coverage — match the real
+receipts on the next slide, where the +5 lift cleared on statements. It's a
+condensed re-enactment of that actual run. Source: recordings/goal.tape;
+re-render with `cd starter/recordings && vhs goal.tape`.)
+
+That's the whole point of the rung: I set the finish line once, and the loop runs
+to it without me. The evaluator only judges what Claude surfaces, so you write the
+condition as something the output can prove.
 
 TRANSITION: And here's what the loop sent back when it cleared the line.
 -->
@@ -3491,8 +3498,76 @@ That's the craft of the rung — even a soft condition becomes runnable once you
 tell the loop how to prove progress: tests run, commits land, the progress file
 grows. Then you walk away and it refactors until it's there.
 
-TRANSITION: In the product, this starts looking less like chat and more like
-an operating surface.
+TRANSITION: A loop and a goal still run one agent. The next rung runs a whole team.
+-->
+
+---
+transition: fade-out
+clicks: 3
+---
+
+# A workflow runs a whole team at once
+
+<div class="text-center text-sm op-60 -mt-2 mb-6">Workout tracker — one ask becomes many agents, fanned out in parallel and cross-checked.</div>
+
+```bash
+ultracode audit every feature slice in the workout tracker for
+missing tests and a11y issues — one agent per slice, in parallel,
+then verify each finding before reporting it back to me.
+```
+
+<div class="grid grid-cols-3 gap-4 mt-10">
+
+<div v-click>
+<Card variant="muted" size="sm">
+<div class="text-sm font-bold" style="color:#ff6bed">Fans out</div>
+<div class="text-sm op-75 mt-1">One prompt spawns many subagents — each takes a slice, all running at once instead of one after another.</div>
+</Card>
+</div>
+
+<div v-click>
+<Card variant="muted" size="sm">
+<div class="text-sm font-bold" style="color:#ff6bed">Cross-checks</div>
+<div class="text-sm op-75 mt-1">Findings get verified by skeptic agents — plausible-but-wrong claims get refuted before they ever reach me.</div>
+</Card>
+</div>
+
+<div v-click>
+<Card variant="muted" size="sm">
+<div class="text-sm font-bold" style="color:#ff6bed">Synthesizes</div>
+<div class="text-sm op-75 mt-1">Runs in the background and merges everything into one report — I get the conclusion, not the file dumps.</div>
+</Card>
+</div>
+
+</div>
+
+<div v-after class="text-center text-lg op-75 mt-10 max-w-4xl mx-auto">
+<code>loop</code> re-sends the prompt · <code>goal</code> adds a finish line · <strong style="color:#ff6bed">workflow</strong> adds a team.
+</div>
+
+<!--
+The third rung. A loop re-sends one prompt; a goal gives that loop a finish line —
+but both still run a single agent, one turn at a time. A workflow breaks that
+ceiling: one ask becomes a team.
+
+The switch is the word "ultracode" — it tells Claude to stop working solo and
+instead write an orchestration script that dispatches subagents. The primitive
+is the workflow; ultracode is the on-switch.
+
+CLICK — It fans out: one agent per feature slice, all running in parallel, so ten
+slices get audited in the time one would have taken.
+CLICK — It cross-checks: every finding is handed to skeptic agents told to refute
+it. The plausible-but-wrong stuff dies before I ever see it — that's the part a
+single agent can't do to itself.
+CLICK — It synthesizes: the whole thing runs in the background and comes back as
+one merged report. I get the conclusion, not a pile of transcripts.
+
+So the trio reads cleanly: loop re-sends the prompt, goal adds a finish line,
+workflow adds a team. The cost is real — it can spawn dozens of agents and burn a
+lot of tokens — so it's opt-in, for audits and migrations, not quick edits.
+
+TRANSITION: In the product, all of this starts looking less like chat and more
+like an operating surface.
 -->
 
 ---
