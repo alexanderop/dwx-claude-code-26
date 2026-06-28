@@ -18,6 +18,18 @@ info: |
   tests, and memory. Plus the software factory that ships AFK.
 
   By Alexander Opalic · DWX 2026 · alexop.dev
+layout: image
+image: /dwx-2026-poster.png
+backgroundSize: contain
+---
+
+<!--
+Opening visual — DWX 2026, Mannheim. Let it breathe for a beat, then move on.
+
+TRANSITION: Now the title.
+-->
+
+---
 layout: cover
 ---
 
@@ -41,30 +53,22 @@ TRANSITION: Quick intro, then where we are in 2026.
 
 ---
 
-# Follow along
-
-<div class="flex flex-col items-center gap-6 mt-12">
-  <div class="text-xl op-80">No need to take notes. No need to screenshot.</div>
-  <div class="text-2xl font-bold" style="color: #ff6bed">alexop.dev/talks/dwx-2026</div>
-  <div class="text-sm op-60">Slides, every link, and the demo repos are all there.</div>
-</div>
-
-<!--
-Everything is online — slides, links, the demo repos. We have an hour: roughly
-45 minutes of talk, the rest is yours for questions. Jot them down as we go.
-
-TRANSITION: Who am I.
--->
-
----
-
 # About me
 
 <About />
 
+<div class="flex flex-col items-center gap-1 mt-6">
+  <div class="text-sm op-70">No notes needed — slides, every link, and the demo repos live here:</div>
+  <div class="text-xl font-bold" style="color: #ff6bed">alexop.dev/talks/dwx-2026</div>
+</div>
+
 <!--
-Alexander Opalic. Vue for 8+ years. Developer at Otto Payments.
-Blog at alexop.dev — these days mostly Vue and AI.
+Alexander Opalic. Vue for 8+ years. Developer at Otto Payments. Blog at
+alexop.dev — these days mostly Vue and AI.
+
+And everything's online — slides, links, demo repos — all at that link. No need
+to take notes or screenshot. We've got an hour: ~45 min of talk, the rest is
+yours for questions.
 
 TRANSITION: Now — here is the world we're shipping into.
 -->
@@ -78,25 +82,17 @@ class: 'text-center'
 
 <div class="text-lg op-70 mt-2 mb-8">Hands up. I'm reading the room.</div>
 
-<div class="grid grid-cols-2 gap-4 max-w-3xl mx-auto">
-
-<Card glow size="sm">
-<div class="text-base font-bold" style="color: #ff6bed">Claude Code</div>
-</Card>
-
-<Card glow size="sm">
-<div class="text-base font-bold" style="color: #ff6bed">Cursor</div>
-</Card>
-
-<Card glow size="sm">
-<div class="text-base font-bold" style="color: #ff6bed">GitHub Copilot</div>
-</Card>
-
-<Card glow size="sm">
-<div class="text-base font-bold" style="color: #ff6bed">Codex / other</div>
-</Card>
-
-</div>
+<TalkCardGrid
+  :columns="2"
+  compact
+  max-width="max-w-3xl"
+  :cards="[
+    { title: 'Claude Code', glow: true },
+    { title: 'Cursor', glow: true },
+    { title: 'GitHub Copilot', glow: true },
+    { title: 'Codex / other', glow: true },
+  ]"
+/>
 
 <div class="text-sm op-60 mt-8">No wrong answer. I just want to know who I'm talking to.</div>
 
@@ -124,55 +120,19 @@ image: /five-levels.png
 backgroundSize: contain
 ---
 
-<div class="absolute bottom-4 right-6 text-xs op-50">
-  Framing: Dan Shapiro · <em>The Five Levels: From Spicy Autocomplete to the Software Factory</em> · Jan 2026
-</div>
-
 <!--
 Dan Shapiro framed this beautifully. Six levels, like driving automation.
 
-L0 spicy autocomplete — AI as a smarter Stack Overflow.
-L1 coding intern — writes boilerplate, you review every line.
-L2 junior dev — pair programmer, you trade off in real time.
-L3 developer — AI writes most of it, you are the verification bottleneck.
-L4 senior dev — runs unattended, you check the final result.
-L5 software factory — you manage goals, AI defines, ships, fixes.
+L0 spicy autocomplete — a smarter Stack Overflow. L1 coding intern — boilerplate,
+you review every line. L2 junior dev — pair programmer. L3 developer — AI writes
+most, you're the verification bottleneck. L4 senior dev — runs unattended. L5
+software factory — you manage goals, AI defines, ships, fixes.
 
-The question for you: where are you actually sitting?
+[walk the levels with your hand as you call them] One hand, your honest level —
+where you actually are this week, not where you wish you were. L0? [count] L1?
+L2? L3? L4? L5? [scan, smile]
 
-TRANSITION: For context, here's how fast this is moving.
--->
-
----
-layout: center
-class: 'text-center'
----
-
-# Raise your hand — where are <span style="color: #ff6bed">you</span>?
-
-<div class="text-base op-70 mt-2 mb-6">One hand. Your honest level today — not where you wish you were.</div>
-
-<div class="grid grid-cols-3 gap-3 max-w-4xl mx-auto">
-
-<Card variant="muted" size="sm"><div class="text-sm"><strong style="color:#ff6bed">L0</strong> · spicy autocomplete</div></Card>
-<Card variant="muted" size="sm"><div class="text-sm"><strong style="color:#ff6bed">L1</strong> · review every line</div></Card>
-<Card variant="muted" size="sm"><div class="text-sm"><strong style="color:#ff6bed">L2</strong> · pair programmer</div></Card>
-<Card glow size="sm"><div class="text-sm"><strong style="color:#ff6bed">L3</strong> · AI writes most</div></Card>
-<Card glow size="sm"><div class="text-sm"><strong style="color:#ff6bed">L4</strong> · runs unattended</div></Card>
-<Card glow size="sm"><div class="text-sm"><strong style="color:#ff6bed">L5</strong> · software factory</div></Card>
-
-</div>
-
-<!--
-[walk the levels with your hand as you call them]
-
-One hand, your honest level — where you actually are this week.
-
-L0, spicy autocomplete? [count] L1, you review every line? [count]
-L2, pair programmer? [count] L3, AI writes most, you're the bottleneck? [count]
-L4, you let it run unattended? [count] L5, software factory? [scan, smile]
-
-Name the median out loud: "most hands at L1 and L2 — so by the end of this talk
+Name the median out loud: "most hands at L1 and L2 — so by the end of this hour
 I want to move you one level to the right. That's the whole goal."
 
 TRANSITION: And here's how fast that ceiling is moving.
@@ -182,9 +142,7 @@ TRANSITION: And here's how fast that ceiling is moving.
 
 # Two weeks ago: Bun got rewritten in Rust
 
-<div class="flex justify-center">
-  <img src="/bun-rust-pr.png" class="max-h-80 rounded-lg shadow-lg" />
-</div>
+<TalkFramedImage src="/bun-rust-pr.png" max-height="20rem" />
 
 <!--
 Exhibit A for why this talk matters.
@@ -199,6 +157,29 @@ Claude even flagged a follow-up PR as AI slop.
 Triumph or disaster? I don't know yet.
 What I know: this is the world we ship into. Major OSS rewritten in two weeks
 by a machine. The pace is real. Not slowing down.
+
+TRANSITION: And that pace? It's relentless. You feel it every morning.
+-->
+
+---
+layout: center
+class: 'text-center'
+---
+
+<TalkFramedImage src="/claude-update-cat.png" max-height="22rem" :shadow="false" />
+
+<!--
+[let it land, get the laugh]
+
+This is the lived experience. You wake up, pour your coffee — there's another
+Claude update. New model, new primitive, new way to do the thing you just
+learned yesterday.
+
+Tinfoil hat on, half-paranoid, trying to keep up.
+
+I'm not going to teach you every feature — half of them will change by the time
+you get home. I'm going to teach you the WORKFLOW underneath, the part that
+doesn't change.
 
 TRANSITION: So here is the line everyone keeps repeating.
 -->
@@ -241,9 +222,7 @@ TRANSITION: So the question is...
 transition: fade-out
 ---
 
-<div class="h-full flex items-center justify-center">
-  <img src="/why-ai-succeeds.png" class="max-h-full max-w-full rounded-lg shadow-lg" />
-</div>
+<TalkFramedImage src="/why-ai-succeeds.png" contain />
 
 <!--
 [hold the silence]
@@ -276,11 +255,7 @@ why people can't predict when the agent will fail.
 
 ---
 
-<div class="flex justify-center items-center h-full">
-
-<img src="/how-an-ai-agent-works.png" alt="How an AI agent works" class="max-h-[85vh] w-auto" />
-
-</div>
+<TalkFramedImage src="/how-an-ai-agent-works.png" alt="How an AI agent works" :rounded="false" :shadow="false" />
 
 <!--
 That is the whole picture.
@@ -360,7 +335,7 @@ TRANSITION: And the loop that runs those tools is just recursion.
 
 # The loop is just recursion
 
-```ts
+```ts {2-3|5-8|11|14-18|all}
 async function agentLoop(messages, systemPrompt, tools = TOOLS) {
   const response = await callApi(messages, systemPrompt, tools)
   const toolResults = await processToolCalls(response.content)
@@ -383,14 +358,16 @@ async function agentLoop(messages, systemPrompt, tools = TOOLS) {
 ```
 
 <!--
-And the loop is just recursion.
+And the loop is just recursion. Walk it one highlight at a time:
 
-Call the API. The model replies with text and maybe some tool_use requests.
-processToolCalls runs each one. Then we grow the conversation: append the
-assistant's reply, then the tool results as the next user turn.
+CLICK — call the API, run every tool the model asked for.
+CLICK — grow the conversation: append the assistant's reply.
+CLICK — no tool calls? The agent is done. Return.
+CLICK — otherwise recurse, with the tool results as the next user turn.
+CLICK — that's all of it, lit up at once.
 
-When the model returns no tool calls — it's done. That is the entire agent
-architecture. Everyone talks about agents like a mystery. They're not.
+That is the entire agent architecture. Everyone talks about agents like a
+mystery. They're not.
 
 (One level up there's a second loop — the REPL that appends each user turn and
 keeps the growing `messages` array. That array IS the agent's memory: no
@@ -403,9 +380,7 @@ TRANSITION: So how big is this whole thing?
 transition: fade-out
 ---
 
-<div class="h-full flex items-center justify-center">
-  <img src="/nanocode-repo.png" class="max-h-full max-w-full rounded-lg shadow-lg" />
-</div>
+<TalkFramedImage src="/nanocode-repo.png" contain />
 
 <!--
 [pause]
@@ -477,27 +452,14 @@ TRANSITION: Not the way you'd expect.
 
 <div class="text-center text-sm op-60 -mt-2 mb-6">Three real projects, written almost entirely by the agent.</div>
 
-<div class="grid grid-cols-3 gap-6 mt-4">
-
-<Card glow>
-<div class="text-3xl mb-2">📝</div>
-<div class="text-lg font-bold mb-1" style="color: #ff6bed">Markdown editor</div>
-<div class="text-sm op-80">A live editor with preview, shortcuts, and local persistence. My first "let it build the whole thing" project.</div>
-</Card>
-
-<Card glow>
-<div class="text-3xl mb-2">📰</div>
-<div class="text-lg font-bold mb-1" style="color: #ff6bed">Nuxt blog starter</div>
-<div class="text-sm op-80">Content, routing, SEO, RSS — a Nuxt template I could actually reuse. Bigger surface, more moving parts.</div>
-</Card>
-
-<Card glow>
-<div class="text-3xl mb-2">🏋️</div>
-<div class="text-lg font-bold mb-1" style="color: #ff6bed">Workout tracker</div>
-<div class="text-sm op-80">An offline-first Vue PWA — log sets, rest timers, exercise library. The most ambitious of the three.</div>
-</Card>
-
-</div>
+<TalkCardGrid
+  class="mt-4"
+  :cards="[
+    { icon: '📝', title: 'Markdown editor', body: 'A live editor with preview, shortcuts, and local persistence. My first &quot;let it build the whole thing&quot; project.', glow: true },
+    { icon: '📰', title: 'Nuxt blog starter', body: 'Content, routing, SEO, RSS — a Nuxt template I could actually reuse. Bigger surface, more moving parts.', glow: true },
+    { icon: '🏋️', title: 'Workout tracker', body: 'An offline-first Vue PWA — log sets, rest timers, exercise library. The most ambitious of the three.', glow: true },
+  ]"
+/>
 
 <div v-click class="text-center text-lg mt-8 op-80">
 Each one bigger than the last. Each one mostly <strong style="color: #ff6bed">not typed by me.</strong>
@@ -511,7 +473,26 @@ SEO. And a workout tracker PWA — offline-first Vue, the most ambitious.
 CLICK — Each one bigger than the last, and each one mostly written by the agent,
 not by me. It felt like magic.
 
-TRANSITION: For about a week. Then two problems showed up — every single time.
+TRANSITION: Let me make the biggest one concrete.
+-->
+
+---
+layout: iframe
+url: https://workout-tracker-ten-pi.vercel.app/
+transition: fade
+---
+
+<!--
+This is the workout tracker. Offline-first Vue PWA: log workouts, track sets,
+run rest timers, keep history, use it on the phone like a real app.
+
+I want you to have the product in your head before we talk about the workflow,
+because this is not "generate a todo app." The agent had to build something with
+state, persistence, mobile UX, and all the little edge cases that make product
+code real.
+
+TRANSITION: And it worked — for about a week. Then two problems showed up every
+single time.
 -->
 
 ---
@@ -582,6 +563,12 @@ transition: fade
 
 # So I flipped the order.
 
+<v-click>
+
+<div class="text-xl op-70 mt-8 max-w-3xl mx-auto">When the agent slips, fix the <strong style="color: #ff6bed">factory — the project itself</strong> — not just the one PR.</div>
+
+</v-click>
+
 <!--
 [pause]
 
@@ -589,6 +576,11 @@ The instinct is to keep correcting the agent's output, prompt by prompt. That's
 a treadmill. So I flipped it: stop correcting turn by turn. Spend the time up
 front instead — make the project itself the kind of place where the agent does
 the right thing by default, and where I can instantly tell if it didn't.
+
+CLICK — and the phrase to hold onto for the whole hour: when the agent gets it
+wrong, fix the FACTORY, not the PR. The project, the rules, the structure — so
+that whole class of mistake can't happen again. We'll come back to it, hard, in
+the last act.
 
 Same insight a senior dev has about any codebase: a good codebase makes good
 changes easy and bad changes loud.
@@ -641,24 +633,6 @@ knows the rules now.
 -->
 
 ---
-layout: image
-image: /memento.png
-backgroundSize: contain
----
-
-<!--
-Claude Code is Leonard from Memento.
-
-Every turn, the context resets. No long-term memory. No yesterday.
-
-So he tattoos the rules on his body. He photographs the people he meets. He
-writes notes he can trust. That is AGENTS.md — the tattoo your agent reads
-every single turn, because tomorrow it will not remember today.
-
-TRANSITION: But the tattoo space is finite — and most of it is used before you write a word.
--->
-
----
 layout: statement
 transition: fade-out
 ---
@@ -672,9 +646,10 @@ transition: fade-out
 </v-click>
 
 <!--
-The Memento metaphor: no memory between turns. The Memento reality: even within
-a turn, the window is finite. 200k tokens at Anthropic, 1M with the extended
-Opus window. OpenAI, Gemini — same shape. A budget.
+Two truths about agent memory. One: nothing carries between turns — every turn
+the context resets, no yesterday. Two: even within a turn, the window is finite.
+200k tokens at Anthropic, 1M with the extended Opus window. OpenAI, Gemini —
+same shape. A budget.
 
 CLICK — And it works BEST when it's not full. Models degrade as the window
 fills. Recall drops. Reasoning slips. The agent starts confusing files. This is
@@ -767,7 +742,7 @@ TRANSITION: So how do you spend the budget wisely? Start with AGENTS.md.
 
 <Card variant="muted" dashed>
 
-<div class="text-xs font-bold mb-2" style="color: #ef4444">BAD · ~2000 lines</div>
+<div class="text-xs font-bold mb-2" style="color: #ef4444">BAD · ~2000 lines ≈ 20% of the window, spent before any code</div>
 
 ```md
 # AGENTS.md
@@ -793,39 +768,41 @@ Half the context gone before any work starts.
 
 <Card glow>
 
-<div class="text-xs font-bold mb-2" style="color: #ff6bed">GOOD · 74 lines (the real one)</div>
+<div class="text-xs font-bold mb-2" style="color: #ff6bed">GOOD · 74 lines ≈ 0.2% — the real one</div>
 
 ```md
 # AGENTS.md
 
 Run `pnpm lint && pnpm type-check` after changes.
+Use `pnpm` only. Never write `else` or `as`.
 
 ## Stack
 Vue 3.5, TypeScript (strict), Vite,
 Dexie (IndexedDB), Vitest browser mode,
 shadcn-vue, Tailwind
 
+## Structure
+One folder per feature in `src/features/`.
+Features never import each other.
+
 ## Further Reading
 **IMPORTANT:** before a task, read the relevant
 doc. **After** a task, update the matching doc —
-treat `docs/` as the persistent knowledge graph;
-the next session only knows what's written there.
+`docs/` is the persistent knowledge graph; the
+next session only knows what's written there.
 
 - `docs/VUE_STYLE_GUIDE.md`
 - `docs/workout-block-model.md`
 ```
 
 <div class="mt-2 text-xs" style="color: #ff6bed">
-Loads docs only when relevant.
+One line of tooling. The rest loads only when relevant.
 </div>
 
 </Card>
 
 </div>
 
-<div v-click class="absolute bottom-4 left-0 right-0 text-center text-lg">
-  Progressive disclosure. <strong style="color: #ff6bed">The right context at the right time.</strong>
-</div>
 
 <!--
 LEFT — the instinct everyone has on day one. Dump everything. Style rules
@@ -842,6 +819,71 @@ Two filters before a line goes in: can a tool enforce it? Then don't write
 prose. Is it universal, or situational? Situational goes in /docs.
 
 CLICK — The right context at the right time.
+
+TRANSITION: AGENTS.md is the front door. And Vercel just put numbers on why that matters.
+-->
+
+---
+transition: fade
+---
+
+# Docs are not skills.
+
+<div class="text-center text-lg op-70 mb-8">
+Vercel tested how agents learn <span style="color: #ff6bed">Next.js 16</span> APIs they were not trained on.
+</div>
+
+<div class="grid grid-cols-3 gap-5 max-w-5xl mx-auto">
+
+<Card variant="muted" size="sm">
+<div class="text-xs op-50 mb-2">Baseline + default skill</div>
+<div class="text-5xl font-bold" style="color: #ef4444">53%</div>
+<div class="text-sm op-70 mt-3">The skill existed. The agent often never opened it.</div>
+</Card>
+
+<Card variant="muted" size="sm">
+<div class="text-xs op-50 mb-2">Skill + explicit instruction</div>
+<div class="text-5xl font-bold" style="color: #fbbf24">79%</div>
+<div class="text-sm op-70 mt-3">Better, but fragile: wording changed the behavior.</div>
+</Card>
+
+<Card glow size="sm">
+<div class="text-xs op-50 mb-2">Compressed AGENTS.md docs index</div>
+<div class="text-5xl font-bold" style="color: #ff6bed">100%</div>
+<div class="text-sm op-70 mt-3">No trigger decision. Always available. Clear retrieval map.</div>
+</Card>
+
+</div>
+
+<div v-click class="text-center text-xl mt-10 max-w-4xl mx-auto">
+Put <strong style="color: #ff6bed">framework docs indexes</strong> in AGENTS.md.
+Put <strong style="color: #ff6bed">repeatable actions</strong> in skills.
+</div>
+
+<div class="absolute bottom-4 right-8 text-xs op-40">vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals</div>
+
+<!--
+This is the nuance I want to add to the simple rule.
+
+Vercel built evals around Next.js 16 APIs — use cache, connection(),
+forbidden(), async cookies and headers — exactly the kind of stuff models may
+not know from training.
+
+They tried a Next.js docs skill. Default behavior: 53 percent pass rate, same
+as baseline. The docs were available, but the agent often never invoked the
+skill. Then they added explicit AGENTS.md instructions to use the skill: 79
+percent. Much better, but the wording became fragile — invoke first versus
+explore first changed what the agent missed.
+
+Then they removed the decision. They put a compressed docs index in AGENTS.md:
+not the whole docs, just "here are the version-matched files, prefer retrieval
+over pre-training." That hit 100 percent in their evals.
+
+So the rule is not "skills are bad." The rule is: don't make passive framework
+knowledge depend on a trigger. For broad docs, give the agent a small always-on
+map. Skills are for verbs — TDD, upgrade this app, run QA, migrate these files.
+
+CLICK — docs indexes in AGENTS.md. Repeatable actions in skills.
 
 TRANSITION: AGENTS.md is the front door. The deeper memory needs a system. Fair warning — the kit I steal it from has a ridiculous name.
 -->
@@ -867,6 +909,9 @@ TRANSITION: And the kit I steal this from is called — conveniently — brainma
 
 # Meet `brainmaxxing` (steal it)
 
+<div class="text-center text-base op-80 mb-1">
+  The payoff first: every session, the agent writes down what it learned — so the next one boots up <strong style="color: #ff6bed">smarter</strong>. Persistent memory, in a folder.
+</div>
 <div class="text-center text-xs op-50 mb-6">
   Many shapes work — this is my current favorite. MIT, ~200 stars, three months old.
 </div>
@@ -875,35 +920,21 @@ TRANSITION: And the kit I steal this from is called — conveniently — brainma
 
 <div>
 
-<div class="grid grid-cols-3 gap-4 mb-6">
-
-<Card variant="muted">
-<div class="text-lg font-bold text-center" style="color: #ff6bed"><code>brain/</code></div>
-<div class="text-xs op-70 text-center mt-1">a markdown vault</div>
-</Card>
-
-<Card variant="muted">
-<div class="text-lg font-bold text-center" style="color: #ff6bed">6 skills</div>
-<div class="text-xs op-70 text-center mt-1">read &amp; write the vault</div>
-</Card>
-
-<Card variant="muted">
-<div class="text-lg font-bold text-center" style="color: #ff6bed">1 hook</div>
-<div class="text-xs op-70 text-center mt-1">loads the map on startup</div>
-</Card>
-
-</div>
+<TalkCardGrid
+  class="mb-6"
+  max-width="max-w-none"
+  :cards="[
+    { title: '<code>brain/</code>', body: 'a markdown vault', variant: 'muted' },
+    { title: '6 skills', body: 'read &amp; write the vault', variant: 'muted' },
+    { title: '1 hook', body: 'loads the map on startup', variant: 'muted' },
+  ]"
+/>
 
 <img src="/brainmaxxing-repo.png" class="rounded-lg shadow-2xl" />
 
 </div>
 
-<div class="flex flex-col items-center gap-3">
-  <img src="/qr-brainmaxxing.png" class="w-44 h-44 bg-white p-2 rounded-lg" />
-  <div class="text-xs op-70 text-center max-w-44">
-    <span style="color: #ff6bed">github.com/<br/>poteto/brainmaxxing</span>
-  </div>
-</div>
+<TalkQrLink image="/qr-brainmaxxing.png" label="github.com/<br/>poteto/brainmaxxing" />
 
 </div>
 
@@ -1040,6 +1071,11 @@ names and one-line descriptions. Progressive disclosure for actions. When your
 prompt matches a description, the body loads. When the body says "run
 scripts/extract.py", THEN the script loads. Three levels of lazy loading — so
 skills scale.
+
+But this is where the Vercel caveat matters: skills are great for triggered
+procedures, not passive framework documentation. If the agent must decide
+whether to open your docs before it knows it is confused, you already lost a
+coin flip. Keep the docs map in AGENTS.md; keep the workflow here.
 
 This is brainmaxxing's /reflect — the actual file. End of session, the agent
 scans the conversation and distils what mattered back into brain/.
@@ -1217,32 +1253,33 @@ layout: default
 
 <div>
 <div class="text-xs op-50 mb-3">Skills that keep <code>brain/</code> alive — each reads, writes, or cleans it</div>
-<div class="grid grid-cols-3 gap-2">
-<Card glow size="sm"><div class="text-base font-bold text-center" style="color: #ff6bed">/plan</div></Card>
-<Card glow size="sm"><div class="text-base font-bold text-center" style="color: #ff6bed">/review</div></Card>
-<Card glow size="sm"><div class="text-base font-bold text-center" style="color: #ff6bed">/reflect</div></Card>
-<Card glow size="sm"><div class="text-base font-bold text-center" style="color: #ff6bed">/meditate</div></Card>
-<Card glow size="sm"><div class="text-base font-bold text-center" style="color: #ff6bed">/ruminate</div></Card>
-<Card glow size="sm"><div class="text-base font-bold text-center" style="color: #ff6bed">/brain</div></Card>
-</div>
+<TalkCardGrid
+  compact
+  max-width="max-w-none"
+  :cards="['/plan', '/review', '/reflect', '/meditate', '/ruminate', '/brain'].map(title => ({ title, glow: true }))"
+/>
 </div>
 
 <div>
 <div class="text-xs op-50 mb-3">16 principles, built in — the four I lean on daily</div>
-<div class="grid grid-cols-2 gap-2">
-<Card glow size="sm"><div class="text-sm font-bold" style="color: #ff6bed">guard-the-context-window</div></Card>
-<Card glow size="sm"><div class="text-sm font-bold" style="color: #ff6bed">fix-root-causes</div></Card>
-<Card glow size="sm"><div class="text-sm font-bold" style="color: #ff6bed">subtract-before-you-add</div></Card>
-<Card glow size="sm"><div class="text-sm font-bold" style="color: #ff6bed">prove-it-works</div></Card>
-</div>
+<TalkCardGrid
+  :columns="2"
+  compact
+  max-width="max-w-none"
+  :cards="[
+    'guard-the-context-window',
+    'fix-root-causes',
+    'subtract-before-you-add',
+    'prove-it-works',
+  ].map(title => ({ title, glow: true }))"
+/>
 <div class="text-xs op-50 mt-3">+ 12 more — each a rule, a why, a pattern, and tests. Full vault on the QR.</div>
 </div>
 
 </div>
 
-<div class="absolute bottom-4 right-8 flex flex-col items-center gap-1">
-  <img src="/qr-brainmaxxing.png" class="w-20 h-20 bg-white p-1.5 rounded" />
-  <div class="text-[10px] op-50">full vault</div>
+<div class="absolute bottom-4 right-8">
+  <TalkQrLink image="/qr-brainmaxxing.png" label="full vault" small />
 </div>
 
 <!--
@@ -1331,36 +1368,6 @@ brainmaxxing solves this by accident — brain/ is a folder in the repo. Check i
 in. The whole team's agent boots up with the same vault on day one. That's the
 bet I'm making.
 
-TRANSITION: Step back — that's actually four kinds of memory.
--->
-
----
-clicks: 3
----
-
-# Memory isn't one thing — it's four
-
-<div class="text-center text-sm op-60 -mt-2 mb-1">The CoALA framework (Princeton). In Claude Code, every type is a file or a command — and each loads at a different moment.</div>
-
-<MemoryTimeline :step="$clicks" />
-
-<!--
-The frame that ties the section together. Researchers at Princeton split agent
-memory into four types — CoALA — and every one maps to a file or command.
-
-Working memory is the context window — /context, /clear, /compact. Semantic is
-stable facts: AGENTS.md plus docs. Procedural is how-to: skills. Episodic is
-lived experience: the brain/ vault, plus Claude Code's auto memory.
-
-CLICK — A chatbot only has the first one. The thing that makes a coding agent
-feel like it learns is the other three. We just built all four.
-
-And that semantic box, AGENTS.md + docs/, just got a spec this month: Google's
-Open Knowledge Format. Same bet as brain/ — a folder of markdown with YAML
-frontmatter — but standardized, so it travels across repos and agents.
-(Aside, if asked / on the talk page: one required field, `type`; check it into
-the repo and the whole team's agent boots up smart. A format beats a platform.)
-
 TRANSITION: One more context trick — bigger than memory.
 -->
 
@@ -1409,6 +1416,10 @@ git subtree add --prefix=repos/vueuse \
 - `repos/nuxt/` — module & plugin conventions.
 ```
 
+<div class="text-xs op-60 mt-5 max-w-4xl">
+Two follow-ups: hide <code>repos/</code> from your editor (<code>autoImportFileExcludePatterns</code> + <code>files.exclude</code>) so it never auto-imports internals — and have the agent <strong style="color:#ff6bed">distill once</strong> into <code>agent-patterns/vueuse.md</code>, so next session loads that, not 800 composables.
+</div>
+
 <div class="absolute bottom-4 right-8 text-xs op-40">
 Credit: <a href="https://effect.website/blog/the-one-weird-git-trick-that-makes-coding-agents-more-effect-ive/">effect.website — The One Weird Git Trick</a>
 </div>
@@ -1428,53 +1439,11 @@ Same trick steals feedback loops too: clone a repo you admire, ask "how do they
 test this?", copy the approach. I packaged it as a skill — clone-repo. Credit:
 the Effect team's blog post by Maxwell Brown.
 
-TRANSITION: One catch — tune the room so humans don't trip over it.
--->
-
----
-
-# Tune the room
-
-<div class="text-sm op-60 mb-4">Hide <code>repos/</code> from your editor so auto-imports don't suggest VueUse internals.</div>
-
-<div class="grid grid-cols-2 gap-6">
-
-<div>
-
-```json
-// .vscode/settings.json
-{
-  "typescript.preferences.autoImportFileExcludePatterns": ["repos/**"],
-  "files.exclude":        { "repos/**": true },
-  "files.watcherExclude": { "repos/**": true },
-  "search.exclude":       { "repos/**": true }
-}
-```
-
-</div>
-
-<div class="flex flex-col justify-center">
-
-<div class="text-sm op-60 mb-3">Then distill it once:</div>
-
-```
-Read repos/vueuse.
-Write agent-patterns/vueuse.md.
-```
-
-</div>
-
-</div>
-
-<!--
-Editor side: without this, VSCode happily auto-imports from
-repos/vueuse/packages/core/. You ship VueUse internals into your app. These
-four lines and the editor pretends repos/ doesn't exist — but the agent still
-reads it.
-
-CLICK — Pattern files: once the agent has explored the source, have it write
-down what it learned. agent-patterns/vueuse.md. Next session it loads that
-instead of re-exploring 800 composables. Cheaper context. Sharper output.
+Two follow-ups, on the footer line: hide repos/ from the editor so VSCode
+doesn't auto-import VueUse internals into your app — four lines in
+.vscode/settings.json — and once the agent has explored the source, have it
+distill what it learned into agent-patterns/vueuse.md so the next session loads
+that instead of re-reading 800 composables.
 
 TRANSITION: Context loads the room. Bucket two — how the agent knows when it's wrong.
 -->
@@ -1637,13 +1606,10 @@ transition: fade-out
 
 </div>
 
-<div class="flex flex-col items-center gap-3">
-  <img src="/qr-eslint.png" class="w-44 h-44 bg-white p-2 rounded-lg" />
-  <div class="text-xs op-70 text-center max-w-44">
-    Full opinionated setup<br/>
-    <span style="color: #ff6bed">alexop.dev/posts/<br/>opinionated-eslint-<br/>setup-vue-projects</span>
-  </div>
-</div>
+<TalkQrLink
+  image="/qr-eslint.png"
+  label="Full opinionated setup<br/>alexop.dev/posts/<br/>opinionated-eslint-<br/>setup-vue-projects"
+/>
 
 </div>
 
@@ -1673,7 +1639,7 @@ TRANSITION: Stock rules are table stakes. The real unlock is rules YOU write.
 
 <div class="text-center text-sm op-60 mb-4">The real <code>eslint-local-rules/</code> in the app — conventions made machine-checkable.</div>
 
-```ts
+```ts {3|5|7|all}
 // eslint-local-rules/index.ts — hand-written, project-specific
 export default { rules: {
   'composable-must-use-vue':    composableMustUseVue,    // a use* fn must touch Vue reactivity
@@ -1686,6 +1652,10 @@ export default { rules: {
 
 <div class="text-center text-lg mt-6 op-80">
 A convention the agent keeps breaking? <strong style="color: #ff6bed">Make it a lint rule it can't break.</strong>
+</div>
+
+<div class="text-center text-sm op-50 mt-3">
+Remember "fix the factory, not the PR"? <strong style="color: #ff6bed">This is it</strong> — in its smallest form.
 </div>
 
 <!--
@@ -1701,6 +1671,80 @@ the build goes red. This is "fix the factory" in its smallest form; we come back
 to it in Act III.
 
 TRANSITION: Lint catches shape. Tests catch behavior. Layer 3.
+-->
+
+---
+layout: two-cols-header
+---
+
+# No hidden throws: Result-style TypeScript
+
+<div class="text-sm op-60">try/catch jumps away from the happy path. <code>tryCatch()</code> makes both paths explicit.</div>
+
+::left::
+
+<div class="text-sm op-60 mb-2 mt-4">Hidden control flow</div>
+
+```ts
+try {
+  const result = await getWorkoutsRepository()
+    .getHistory({ limit: 100 })
+} catch (error) {
+  notify(error.message)
+}
+```
+
+::right::
+
+<div class="text-sm op-60 mb-2 mt-4">Explicit Result tuple: <code>[Error, null] | [null, data]</code></div>
+
+```ts
+const [error, result] = await tryCatch(
+  getWorkoutsRepository().getHistory({ limit: 100 }),
+)
+
+if (error) return notify(error.message)
+```
+
+<!--
+try/catch is JavaScript's built-in "jump to this block if something throws".
+That is useful, but the error flow is hidden in a separate block.
+
+In this app, the convention is tryCatch: it returns an error-first Result tuple.
+Failure is [Error, null]. Success is [null, data]. It is Rust-ish, but the point
+is not copying Rust syntax. The point is making the unhappy path explicit in the
+same place as the data path.
+
+TRANSITION: A convention is only as good as its enforcement. Next: make it machine-checkable.
+-->
+
+---
+
+# The convention, machine-checked
+
+<div class="text-sm op-60 mb-4">A custom ESLint rule turns the <code>tryCatch()</code> convention into a build error.</div>
+
+```ts {2-5}
+// eslint-local-rules/repository-trycatch.ts
+if (!isRepoMethodCall(node.argument)) return
+if (isWrappedInTryCatch(context, node)) return
+
+context.report({ messageId: 'missingTryCatch' })
+```
+
+<div class="text-center text-xl mt-12 op-80">
+The agent does not remember this convention. <strong style="color: #ff6bed">ESLint does.</strong>
+</div>
+
+<!--
+The custom ESLint rule makes the convention machine-checkable. Any awaited
+get-star-Repository call that is not inside tryCatch fails lint, with a message
+telling the agent exactly what pattern to write.
+
+That is the whole trick: the agent does not need to remember the convention,
+because the linter reminds it on every run.
+
+TRANSITION: Lint catches code shape. Tests catch behavior. Layer 3.
 -->
 
 ---
@@ -1760,6 +1804,10 @@ it("emits update when a digit is pressed", async () => {
 })
 ```
 
+<div v-click class="mt-6 text-sm">
+<span style="color:#ff6bed">The real unlock:</span> a failing test drops a <strong>screenshot of the rendered UI</strong> — and Claude is multimodal, so it <em>sees</em> the broken frame. It debugs by looking at the screen, like you do.
+</div>
+
 <!--
 Layer 4 — component tests in a REAL browser. The biggest win in 2026. Vitest
 browser mode runs your component tests in a real Chromium via Playwright instead
@@ -1768,6 +1816,14 @@ of jsdom.
 Hover states. Focus. Layout. Intersection observers. Scroll. All work as they
 do in production. The agent can finally trust that "passes in tests" means
 "works in the browser."
+
+CLICK — and here's the part that matters for an AGENT specifically: when a test
+fails, browser mode captures a screenshot of the actual rendered UI. And Claude
+is multimodal — it doesn't just read "expected true, got false," it looks at the
+picture. "The keypad is rendering behind the modal." "The label clipped." "The
+empty state never showed." jsdom gave the agent a stack trace; browser mode gives
+it eyes. It debugs the way I would — by looking at the screen. That's the loop
+closing on the one thing it could never see before: how the app actually looks.
 
 TRANSITION: Four layers of signal — but signal the agent can ignore. Next: make the discipline non-skippable.
 -->
@@ -1785,16 +1841,6 @@ TRANSITION: Four layers of signal — but signal the agent can ignore. Next: mak
 <div class="text-xs op-50 mb-2"><code>.claude/skills/tdd/SKILL.md</code></div>
 
 ````md magic-move
-```yaml
----
-name: tdd
-description: >-
-  Strict Red-Green-Refactor for new
-  features. Use when implementing,
-  adding, or building functionality.
-  Not for bug fixes, docs, or config.
----
-```
 ```md
 # TDD — mandatory 3-phase cycle
 
@@ -1852,9 +1898,9 @@ And it's structural, not motivational. A single context window can't really do
 TDD — the test-writer's analysis leaks into the implementer, so the model quietly
 designs the tests around the code it already planned.
 
-So I made TDD a skill. CLICK — the body is a mandatory three-phase cycle: RED,
-GREEN, REFACTOR, each delegated to its own subagent so the phases can't see each
-other. The test-writer literally has to watch the test fail before it returns.
+So I made TDD a skill. The body is a mandatory three-phase cycle: RED, GREEN,
+REFACTOR, each delegated to its own subagent so the phases can't see each other.
+The test-writer literally has to watch the test fail before it returns.
 CLICK — and a hard "never" list: no code before a failing test, no GREEN without
 RED.
 
@@ -1863,8 +1909,43 @@ it forces the agent to evaluate its skills before it codes, instead of hoping it
 remembers. Honest gap: it's not 100%, and wiring it up is real work. But it's
 enforced, not wished-for.
 
-TRANSITION: Hold onto this — later, when vue-ink runs "Port test → RED → GREEN,"
-THIS is the discipline that makes that loop honest.
+TRANSITION: And that discipline is only one layer of feedback.
+-->
+
+---
+clicks: 4
+transition: fade-out
+---
+
+# One delegate. Nine red/green/refactor turns. Clean context.
+
+<div class="text-center text-sm op-60 mb-3">Hand the whole feature to a nested <code>tdd-orchestrator</code> — nine red/green/refactor turns happen two levels down, your context never sees them.</div>
+
+<TddNestedFlow :step="$clicks" />
+
+<!--
+The TDD skill from the last slide had a hidden cost: if the MAIN chat runs the
+three phases, every test failure, every diff, every refactor lands in your one
+context window. Five features in, it's a swamp.
+
+Nested subagents fix the shape. CLICK — you ask the main chat for the Set Logger,
+three acceptance criteria. CLICK — it doesn't write a line. It hands the WHOLE
+feature to the tdd-orchestrator, one nested subagent.
+
+Now watch the right side. CLICK — AC1, RED: the orchestrator spawns tdd-test-writer
+in its OWN fresh context. The test fails — it has to SEE red. CLICK — GREEN:
+tdd-implementer, separate context, makes it pass. CLICK — REFACTOR: tdd-refactorer
+cleans up, tests stay green. CLICK, CLICK — AC2 and AC3 run the same loop.
+
+CLICK — the orchestrator returns ONE summary: 3 of 3 green, 9 tests. Look at the
+left lane: the main chat saw two messages — "build it" and "done." The nine
+red/green/refactor turns happened two levels down and never polluted the context
+you're actually steering from.
+
+That's the whole trick: delegation isn't just parallelism, it's context hygiene.
+The orchestrator is a disposable workspace.
+
+TRANSITION: And that discipline is only one layer of feedback.
 -->
 
 ---
@@ -1879,13 +1960,10 @@ THIS is the discipline that makes that loop honest.
   <img src="/quality-pipeline-layers.png" class="rounded-lg shadow-2xl" />
 </div>
 
-<div class="flex flex-col items-center gap-3">
-  <img src="/qr-quality-pipeline.png" class="w-44 h-44 bg-white p-2 rounded-lg" />
-  <div class="text-xs op-70 text-center max-w-44">
-    Full breakdown<br/>
-    <span style="color: #ff6bed">alexop.dev/posts/<br/>modern-frontend-<br/>quality-pipeline</span>
-  </div>
-</div>
+<TalkQrLink
+  image="/qr-quality-pipeline.png"
+  label="Full breakdown<br/>alexop.dev/posts/<br/>modern-frontend-<br/>quality-pipeline"
+/>
 
 </div>
 
@@ -1909,33 +1987,16 @@ TRANSITION: And in the real app, this isn't a diagram — it's wired up.
 
 <div class="text-center text-sm op-60 mb-4">All from the workout tracker — the app I "didn't type."</div>
 
-<div class="grid grid-cols-2 gap-5 mt-2">
-
-<Card glow>
-<div class="text-xs op-60 mb-1">Tests</div>
-<div class="text-3xl font-bold" style="color:#ff6bed">906</div>
-<div class="text-xs op-70">cases · 95 files · 4 Vitest projects (default · a11y · visual · arch)</div>
-</Card>
-
-<Card glow>
-<div class="text-xs op-60 mb-1">CI jobs</div>
-<div class="text-3xl font-bold" style="color:#ff6bed">13</div>
-<div class="text-xs op-70">lint · knip · type-check · 4 test shards · arch · a11y · visual · perf</div>
-</Card>
-
-<Card glow>
-<div class="text-xs op-60 mb-1">Lighthouse budget (gated in CI)</div>
-<div class="text-3xl font-bold" style="color:#ff6bed">a11y 1.0</div>
-<div class="text-xs op-70">perf ≥ 0.80 · LCP ≤ 3.5s · CLS ≤ 0.1</div>
-</Card>
-
-<Card glow>
-<div class="text-xs op-60 mb-1">Coverage gate</div>
-<div class="text-3xl font-bold" style="color:#ff6bed">80%</div>
-<div class="text-xs op-70">lines / functions / statements · 75% branches</div>
-</Card>
-
-</div>
+<TalkCardGrid
+  :columns="2"
+  max-width="max-w-none"
+  :cards="[
+    { eyebrow: 'Tests', value: '906', body: 'cases · 95 files · 4 Vitest projects (default · a11y · visual · arch)', glow: true },
+    { eyebrow: 'CI jobs', value: '13', body: 'lint · knip · type-check · 4 test shards · arch · a11y · visual · perf', glow: true },
+    { eyebrow: 'Lighthouse budget (gated in CI)', value: 'a11y 1.0', body: 'perf ≥ 0.80 · LCP ≤ 3.5s · CLS ≤ 0.1', glow: true },
+    { eyebrow: 'Coverage gate', value: '80%', body: 'lines / functions / statements · 75% branches', glow: true },
+  ]"
+/>
 
 <!--
 The 15 layers aren't a diagram — they're wired up in the real app. 906 tests
@@ -1946,68 +2007,10 @@ score a perfect 1.0. Coverage gated at 80%.
 This is what "tests are permission to let the agent move fast" looks like —
 that's how much signal the agent has to chase before anything merges.
 
-NOTE TO SELF: the file scan said 95 files / 906 tests; an older in-repo log said
-86 / 783. Re-run `pnpm test` and quote the current number before the talk.
+Reminder: re-run `pnpm test` in the workout-tracker repo and confirm the
+on-slide figure (906 tests / 95 files) is current before presenting.
 
 TRANSITION: Those 15 are automated. There's one more, and it's different.
--->
-
----
-transition: fade-out
----
-
-# Meet `agent-browser`
-
-<div class="text-center text-sm op-60 mb-6">A browser CLI shaped for AI agents.</div>
-
-```bash
-npm i -g agent-browser
-agent-browser install              # downloads Chromium
-
-agent-browser open localhost:5173
-agent-browser snapshot -i          # DOM tree with @refs
-agent-browser click @e2            # click by ref
-agent-browser fill @e3 "hello"     # type into input
-agent-browser screenshot --annotate
-agent-browser console              # read page console
-```
-
-<div class="absolute bottom-6 right-8 flex flex-col items-center gap-2">
-  <img src="/qr-agent-browser.png" class="w-28 h-28 bg-white p-2 rounded-lg" />
-  <div class="text-xs op-70" style="color: #ff6bed">github.com/vercel-labs/agent-browser</div>
-</div>
-
-<!--
-[breathe]
-
-One npm install. One binary download. The agent now has a real Chromium it can
-drive from the command line.
-
-Snapshot returns the DOM as plain text with @refs. Click by ref, fill by ref.
-Screenshots come back annotated. Console errors come back as text. The same
-things a human QA notices in the first thirty seconds.
-
-TRANSITION: So once the project runs locally AND the agent has this...
--->
-
----
-transition: fade-out
----
-
-<div class="flex justify-center items-center h-full">
-
-<img src="/agent-browser-bug-reproduced.png" alt="Agent reproducing a bug via agent-browser" class="max-h-[85vh] w-auto rounded-lg" />
-
-</div>
-
-<!--
-[breathe]
-
-This is the agent driving agent-browser to reproduce a real bug. Resize to
-mobile, screenshot, read it back, diagnose the cause. No human in the loop — the
-agent SEES the bug like a user would.
-
-TRANSITION: So once the project runs locally AND the agent has this...
 -->
 
 ---
@@ -2042,12 +2045,234 @@ the user.
 
 Two ingredients. ONE — an agent-runnable Vue app: dev server is ONE command,
 port is STABLE, there's a way to know "server is ready", test data is seeded, no
-surprise cookie banners. Deterministic. TWO — agent-browser.
+surprise cookie banners. Deterministic. TWO — a real browser the agent can
+drive, which is exactly the tool on the next slide.
 
 CLICK — So the loop becomes: agent writes code, types pass, lint passes, tests
 pass, THEN the agent opens the app, runs the change, screenshots it, reads the
 console. If anything's wrong, it goes back. This is the click-through-by-hand
 step, automated — and it's what killed my fear.
+
+TRANSITION: So here's the tool that makes the "open the app" step real.
+-->
+
+---
+clicks: 5
+transition: fade-out
+---
+
+# What `agent-browser` really gives the agent
+
+<div class="text-center text-sm op-60 mb-4">Example ask: "Go to OTTO.de, find a product, and add it to the cart."</div>
+
+<AgentBrowserOttoFlow :step="$clicks" />
+
+<!--
+[breathe]
+
+This is the real trick. agent-browser is not "the agent magically sees a
+website." It is a command-line protocol for a real Chromium session.
+
+CLICK 1 — The agent first bounds the task. In a real run I want it to stay on
+OTTO.de, use a named session, and know the line: adding to cart is okay,
+checkout or payment needs explicit confirmation.
+
+CLICK 2 — Then it opens the page and asks for a snapshot. Snapshot is the
+accessibility tree as compact text. The important part is the @refs: searchbox,
+cookie button, cart link, product result, add-to-cart button.
+
+CLICK 3 — The agent acts through those refs. It fills the search field, presses
+Enter, clicks a product. No brittle Playwright selector file. It chooses from
+what the browser says is currently interactable.
+
+CLICK 4 — After every page change, the refs are stale. That is the core mental
+model. Click, wait, snapshot again. The agent keeps rebuilding its map of the
+page.
+
+CLICK 5 — Cookie banners, modals, variant pickers, out-of-stock messages: these
+are not special cases in the talk track. They are just the next snapshot and the
+next ref.
+
+CLICK 6 — And before it says "done", it verifies. Read visible text, read page
+errors, take an annotated screenshot. The result is not "I think I clicked the
+button." The result is "I saw the cart confirmation, there were zero browser
+errors, here is the screenshot."
+
+TRANSITION: So once the project runs locally AND the agent has this loop...
+-->
+
+---
+transition: fade-out
+---
+
+# Yes, this slide was made by an agent
+
+<div class="grid grid-cols-[1.05fr_0.95fr] gap-8 items-center mt-4">
+
+<div>
+
+<div class="text-4xl font-bold leading-tight">
+I used <span style="color:#ff6bed">Codex</span><br/>
+with <code>agent-browser</code><br/>
+to build the slide<br/>
+you just saw.
+</div>
+
+<div class="mt-6 text-lg op-75 leading-snug">
+It captured OTTO.de, read the accessibility tree, checked the rendered slide,
+then tightened the layout until the full story fit.
+</div>
+
+</div>
+
+<div class="rounded-lg overflow-hidden border border-white/12 shadow-2xl" style="box-shadow: 0 24px 80px -40px rgba(255,107,237,.9)">
+  <img src="/codex-agent-browser-slide-review.png" alt="Codex reviewing the generated agent-browser slide screenshot" class="w-full block" />
+</div>
+
+</div>
+
+<!--
+[smile]
+
+And the fun part: I made that slide the same way the slide explains.
+
+I gave Codex the task. It used agent-browser to open OTTO.de, capture real
+screenshots, read the snapshot refs, build the interactive Slidev component,
+run the build, open the deck in a browser, screenshot the slide, notice the
+footer collision, and iterate until the whole story fit.
+
+So this is not a diagram about a workflow. This is a receipt from the workflow.
+
+TRANSITION: And you can package that loop into a skill.
+-->
+
+---
+transition: fade-out
+---
+
+# Clone a QA engineer into `/tmp`
+
+<div class="grid grid-cols-[1fr_16rem] gap-8 items-center mt-4">
+
+<div>
+
+<div class="text-2xl font-bold leading-tight mb-5">
+Vercel had the right instinct:<br/>
+dogfood the preview like a real user.
+</div>
+
+<div class="text-lg op-75 leading-snug mb-6">
+The <code>dogfood</code> skill turns one URL into an exploratory QA pass:
+navigate, click, type, resize, inspect the console, and save repro evidence.
+</div>
+
+<a href="https://github.com/alexanderop/dogfood-qa" class="text-sm font-mono" style="color:#ff6bed">
+github.com/alexanderop/dogfood-qa
+</a>
+
+```bash
+git clone https://github.com/alexanderop/dogfood-qa /tmp/dogfood-qa
+cp -R /tmp/dogfood-qa/.claude/skills/dogfood .claude/skills/
+
+# then:
+# "dogfood http://localhost:3000"
+```
+
+</div>
+
+<TalkQrLink
+  image="/qr-dogfood-qa.png"
+  label="github.com/<br/>alexanderop/<br/>dogfood-qa"
+/>
+
+</div>
+
+<!--
+This is the next move.
+
+If agent-browser is the browser primitive, a dogfood skill is the reusable QA
+procedure around it. Clone the repo into tmp, copy the skill into your project
+or user skills, and now "dogfood this preview" means: behave like a QA engineer,
+not like a screenshot script.
+
+It clicks through the app, tests edge cases, checks console noise, records
+evidence, and gives you a report a team can actually act on.
+
+TRANSITION: Here's what that looks like when the target is OTTO.de.
+-->
+
+---
+transition: fade-out
+---
+
+# What the dogfood skill gives you back
+
+<div class="grid grid-cols-[0.92fr_1.08fr] gap-7 items-center mt-3">
+
+<div class="space-y-4">
+
+<Card glow>
+<div class="text-xs uppercase tracking-wide op-55 mb-2">Real OTTO.de run</div>
+<div class="text-5xl font-bold" style="color:#ff6bed">5</div>
+<div class="text-lg font-semibold">documented findings</div>
+<div class="text-sm op-70 mt-2">1 medium · 4 low · screenshots · repro video · console summary</div>
+</Card>
+
+<Card variant="muted">
+<div class="text-sm font-semibold mb-2">QA-style checklist</div>
+<div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm op-80">
+  <div>navigation</div>
+  <div>forms</div>
+  <div>edge cases</div>
+  <div>mobile</div>
+  <div>accessibility</div>
+  <div>console</div>
+</div>
+</Card>
+
+<Card variant="muted">
+<div class="text-xs op-65 mb-1"><code>dogfood-output/report.md</code></div>
+<div class="text-sm">Every issue gets severity, category, URL, repro steps, and linked screenshots.</div>
+</Card>
+
+</div>
+
+<div class="rounded-lg overflow-hidden border border-white/12 shadow-2xl bg-black">
+  <img src="/dogfood-qa/issue-004-result.png" alt="OTTO.de dogfood QA report screenshot showing an error state with annotated browser refs" class="w-full block" />
+</div>
+
+</div>
+
+<!--
+[point at screenshot]
+
+This is the important part: the output is not "seems fine" or "I clicked
+around." It is a QA handoff.
+
+For this OTTO.de run, the skill found five issues. The medium one was a stale or
+unknown filter parameter that pushed search results into a persistent error
+state. The report includes the URL, screenshots for every step, and a repro
+video for the interactive bug.
+
+That is much closer to what a QA engineer gives you: a bug you can assign, not a
+vague paragraph about quality.
+
+TRANSITION: Here's another receipt — the same loop catching a real UI bug.
+-->
+
+---
+transition: fade-out
+---
+
+<TalkFramedImage src="/agent-browser-bug-reproduced.png" alt="Agent reproducing a bug via agent-browser" :shadow="false" />
+
+<!--
+[breathe]
+
+This is the agent driving agent-browser to reproduce a real bug. Resize to
+mobile, screenshot, read it back, diagnose the cause. No human in the loop — the
+agent SEES the bug like a user would — exactly the "did it actually work?" check
+from two slides ago, now running itself.
 
 TRANSITION: Nice — but how do you make the agent ALWAYS do this, not just when you ask?
 -->
@@ -2134,11 +2359,15 @@ Verdict: MINOR_ISSUES   ·   2026-04-12
 
 <div class="flex flex-col gap-3 justify-center">
 
-<Card glow><div class="text-3xl font-bold" style="color:#ff6bed">70 turns</div><div class="text-xs op-70">one agent · ~10.5 min wall-clock</div></Card>
-
-<Card glow><div class="text-3xl font-bold" style="color:#ff6bed">2 real bugs</div><div class="text-xs op-70">found by driving the live app, no human</div></Card>
-
-<Card variant="muted" size="sm"><div class="text-xs op-80">7 acceptance criteria checked · machine-readable verdict in <code>qa-structured-output.json</code></div></Card>
+<TalkCardGrid
+  :columns="1"
+  max-width="max-w-none"
+  :cards="[
+    { value: '70 turns', body: 'one agent · ~10.5 min wall-clock', glow: true },
+    { value: '2 real bugs', body: 'found by driving the live app, no human', glow: true },
+    { body: '7 acceptance criteria checked · machine-readable verdict in <code>qa-structured-output.json</code>', variant: 'muted' },
+  ]"
+/>
 
 </div>
 
@@ -2156,58 +2385,225 @@ and a missing role=timer for screen readers.
 It wrote qa-report.md and a machine-readable verdict. "Types passing isn't
 shipping; working in a browser is" — here's the agent proving exactly that.
 
-TRANSITION: All those layers are SIGNALS. You still need a GATE.
+TRANSITION: The laptop version works. Now we need the headless version.
 -->
 
 ---
 transition: fade-out
 ---
 
-# From my laptop to every PR
+# First: `claude -p`
 
-<div class="text-center text-sm op-70 mb-4">The <em>same</em> QA agent — now unattended in CI, on every <code style="color: #ff6bed">pull_request</code>.</div>
+<div class="text-center text-sm op-70 mb-8">Claude Code without the chat UI.</div>
 
-```yaml
-# .github/workflows/qa.yml — autonomous QA on a preview deploy
-- run: npm i -g agent-browser @anthropic-ai/claude-code && agent-browser install
-
-- run: |
-    claude -p "Open $PREVIEW_URL with agent-browser. Walk every nav route,
-      read the console on each, report PASS/FAIL with repro steps." \
-      --append-system-prompt "You are a senior QA engineer. Be concise." \
-      --allowedTools "Bash(agent-browser*)" --max-turns 30 \
-      --output-format json --json-schema "$SCHEMA" \
-      | jq '.structured_output' > qa-report.json
-
-- run: gh pr comment "$PR" --body-file qa-report.json   # human returns here
+```bash
+claude -p "Test this preview like a QA engineer" \
+  --allowedTools "Bash(agent-browser*)"
 ```
 
-<div class="grid grid-cols-3 gap-3 mt-4 max-w-5xl mx-auto">
-<Card variant="muted" size="sm"><div class="text-xs op-80">One auto-approved tool: <code style="color: #ff6bed">Bash(agent-browser*)</code>. The agent drives a <em>real</em> browser — no Playwright selectors to maintain.</div></Card>
-<Card variant="muted" size="sm"><div class="text-xs op-80"><code>--json-schema</code> + <code>jq '.structured_output'</code> turn freeform findings into a <code style="color: #ff6bed">MINOR_ISSUES</code> verdict + <code>bugs[]</code> — the bridge to a PR comment.</div></Card>
-<Card glow size="sm"><div class="text-xs op-90">Honest gap: it can't approve. Every PR gets a QA pass; <strong style="color: #ff6bed">you</strong> read the verdict, not the run.</div></Card>
+<div class="mt-8 max-w-3xl mx-auto">
+<Card variant="muted">
+<div class="text-lg text-center leading-snug">
+One prompt in. One report out.<br/>
+No interactive session, no back-and-forth.
 </div>
-
-<div class="absolute bottom-4 right-8 text-xs op-40">alexop.dev/posts/automated-qa-claude-code-agent-browser-cli-github-actions</div>
+</Card>
+</div>
 
 <!--
 [breathe]
 
-That QA run lived on my laptop. Same agent, one move — lift it into a GitHub
-Actions workflow so it runs on every pull request, with nobody watching.
+This is the bridge from "I asked Claude in a terminal" to "CI can run Claude
+while nobody is watching."
 
-The CI plumbing is boring on purpose. Two installs. Then the exact `claude -p`
-from the local run — senior-QA persona appended to the system prompt, ONE
-auto-approved tool, `Bash(agent-browser*)`, a turn cap. It drives a real browser
-against the preview deploy, so it adapts to layout changes instead of fighting
-brittle Playwright selectors.
+`claude -p` is print mode. It gives Claude Code a one-shot prompt from the
+terminal. No chat UI, no interactive follow-up, no human waiting at the
+keyboard. That makes it scriptable.
 
-The trick that makes this CI-shaped is `--json-schema`. Freeform findings become
-a structured verdict plus a bugs array; `jq` pulls `.structured_output` and `gh`
-posts it as a PR comment.
+And scriptable is the important word. If I can run it from my terminal, GitHub
+Actions can run it on a pull request.
 
-And that comment is the honest gap: the agent can't approve. Autonomous all the
-way through, human back at review. From my laptop to every PR.
+TRANSITION: But I don't want to give CI-Claude my whole machine. I want to give
+it exactly one useful tool.
+-->
+
+---
+transition: fade-out
+---
+
+# Give the agent one browser tool
+
+<div class="text-center text-sm op-70 mb-6">One narrow permission: <code style="color: #ff6bed">Bash(agent-browser*)</code></div>
+
+<div class="grid grid-cols-3 gap-5 mt-8 max-w-5xl mx-auto">
+
+<Card variant="muted">
+<div class="text-xs uppercase tracking-wide op-50 mb-2">Step 1</div>
+<div class="text-3xl font-bold" style="color:#ff6bed"><code>open</code></div>
+<div class="text-sm op-75 mt-3">Load the preview deploy in real Chromium.</div>
+</Card>
+
+<Card glow>
+<div class="text-xs uppercase tracking-wide op-50 mb-2">Step 2</div>
+<div class="text-3xl font-bold" style="color:#ff6bed"><code>snapshot -i</code></div>
+<div class="text-sm op-80 mt-3">Read the interactive accessibility tree with refs.</div>
+</Card>
+
+<Card variant="muted">
+<div class="text-xs uppercase tracking-wide op-50 mb-2">Step 3</div>
+<div class="text-3xl font-bold" style="color:#ff6bed"><code>click / fill / console</code></div>
+<div class="text-sm op-75 mt-3">Act like a user, then inspect browser errors.</div>
+</Card>
+
+</div>
+
+<div class="mt-7 text-center text-lg op-80">
+No Playwright selectors to maintain. The agent chooses from what the browser exposes.
+</div>
+
+<!--
+That permission string is the safety shape.
+
+I am not saying "run anything you want." I am saying: you may run Bash commands
+that start with agent-browser. That's enough for QA.
+
+The loop is simple. Open the preview. Ask for an interactive snapshot. Click or
+fill using the refs from that snapshot. Then snapshot again, because the page
+changed and the refs are stale. At the end, read the console.
+
+That's why this works across layout changes. The agent doesn't need my selector
+file. It keeps asking the browser what is currently interactable.
+
+TRANSITION: Now the agent can explore. CI still needs a contract.
+-->
+
+---
+transition: fade-out
+---
+
+# Free text is not a CI contract
+
+<div class="grid grid-cols-[0.9fr_1.1fr] gap-6 items-center mt-6">
+
+<Card variant="muted">
+<div class="text-xs uppercase tracking-wide op-50 mb-3">Nice for humans</div>
+<div class="text-3xl font-bold leading-tight">"Looks good,<br/>no issues found."</div>
+<div class="text-sm op-65 mt-4">Hard for a workflow to branch on.</div>
+</Card>
+
+<Card glow>
+<div class="text-xs uppercase tracking-wide op-50 mb-3">Useful for CI</div>
+<div class="text-4xl font-bold leading-tight" style="color:#ff6bed">{ verdict,<br/>summary,<br/>bugs[] }</div>
+<div class="text-sm op-80 mt-4">A shape your script can read every time.</div>
+</Card>
+
+</div>
+
+```bash
+--output-format json \
+--json-schema "$SCHEMA" \
+| jq '.structured_output'
+```
+
+<!--
+This is the deterministic part.
+
+Claude exploring a website is naturally a little non-deterministic. It may click
+different links, phrase the summary differently, or notice different details.
+That's fine for exploration. It's not fine for CI.
+
+So the contract is JSON schema. Claude still does the human-shaped work:
+explore, interpret, judge severity. But the output lands in the same shape every
+time: verdict, summary, bugs.
+
+Then `jq` extracts only the structured output, and the boring script can decide
+what to do next.
+
+TRANSITION: With those three pieces, the GitHub Action becomes almost boring.
+-->
+
+---
+transition: fade-out
+---
+
+# Now put the same run in GitHub Actions
+
+<div class="text-center text-sm op-70 mb-5">The same local command becomes unattended PR feedback.</div>
+
+```yaml
+on: pull_request
+
+steps:
+  - run: npm i -g agent-browser @anthropic-ai/claude-code
+  - run: agent-browser install
+  - run: claude -p "$QA_PROMPT" ...
+  - run: gh pr comment "$PR" --body-file qa-report.json
+```
+
+<div class="mt-6 max-w-3xl mx-auto">
+<Card variant="muted">
+<div class="text-base text-center leading-snug">
+Every PR gets the same browser QA pass: open preview, navigate, check console, post the report.
+</div>
+</Card>
+</div>
+
+<div class="absolute bottom-12 right-8 text-xs op-40">alexop.dev/posts/automated-qa-claude-code-agent-browser-cli-github-actions</div>
+
+<!--
+Now the full workflow is easy to explain.
+
+On every pull request, install Claude Code, install agent-browser, run the same
+`claude -p` QA prompt, and post the structured report back to the PR.
+
+The details live in the blog post: the actual schema, the longer prompt, the
+exact `jq` extraction. The slide does not need to carry all of that. The slide
+needs the mental model: local QA command, lifted into CI, producing a PR comment.
+
+TRANSITION: But this is still a signal, not a human replacement.
+-->
+
+---
+transition: fade-out
+---
+
+# It reports. You decide.
+
+<div class="max-w-4xl mx-auto mt-10 text-center">
+
+<div class="text-4xl font-bold leading-tight">
+The agent does not approve the PR.
+</div>
+
+<div class="text-2xl op-75 mt-5 leading-snug">
+It gives every PR a QA pass <span style="color:#ff6bed">you can read</span>.
+</div>
+
+</div>
+
+<div class="mt-10">
+
+<TalkCardGrid
+  :columns="3"
+  max-width="max-w-5xl"
+  :cards="[
+    { eyebrow: 'green', value: 'HEALTHY', body: 'no bugs found in the explored paths', glow: true },
+    { eyebrow: 'yellow', value: 'MINOR_ISSUES', body: 'ship consciously, fix follow-ups', variant: 'muted' },
+    { eyebrow: 'red', value: 'CRITICAL_BUGS', body: 'block until a human reads the repro', variant: 'muted' },
+  ]"
+/>
+
+</div>
+
+<!--
+This is the honest gap, and I want to say it clearly.
+
+The agent cannot approve the pull request. It should not be the owner of
+shipping judgment. What it can do is remove the skipped-QA problem.
+
+Every PR gets a real browser pass. Every PR gets a verdict. Every PR gets repro
+steps when something breaks. Then the human returns at the right level: not
+clicking around randomly, but reading a focused QA report.
 
 TRANSITION: QA is a signal — even on every PR. A signal can be ignored. You still need a GATE.
 -->
@@ -2218,7 +2614,7 @@ TRANSITION: QA is a signal — even on every PR. A signal can be ignored. You st
 
 <div class="text-center text-sm op-70 mb-4">A Git hook runs lint, types, and dead-code checks before bad code reaches the branch.</div>
 
-```bash
+```bash {2|3|4|all}
 # .husky/pre-commit — bad code never reaches main
 pnpm lint        # oxlint → eslint → markdownlint
 pnpm type-check  # vue-tsc --build (project references)
@@ -2272,7 +2668,19 @@ layout: statement
 
 # Most Vue apps start flat
 
+<v-click>
+
+<div class="text-lg op-70 mt-8 max-w-3xl mx-auto">Quick hands — who's got a <code>components/</code> folder that's crept past <strong style="color: #ff6bed">50 files</strong>?</div>
+
+</v-click>
+
 <!--
+[re-engage the room after the long feedback stretch — get hands up before the diagram]
+
+CLICK — quick hands, no judgment: who has a components/ folder that quietly
+crept past fifty files? [scan] Yeah — that's most rooms. Hold that feeling, it's
+exactly the pain this section fixes.
+
 A definition before the agent angle. Flat structure groups files by file TYPE.
 Components live in components/. Composables in composables/. A store is a store,
 so it goes in stores/.
@@ -2587,9 +2995,7 @@ TRANSITION: But folders alone won't keep the agent honest. You need rules.
 transition: fade-out
 ---
 
-<div class="h-full flex items-center justify-center">
-  <img src="/who-can-import-what.png" class="max-h-full max-w-full rounded-lg shadow-lg" />
-</div>
+<TalkFramedImage src="/who-can-import-what.png" contain />
 
 <!--
 Three rules. That's it.
@@ -2708,6 +3114,360 @@ transition: fade
 
 Last act. The bigger picture — back to thread one, the general workflow. Once
 the codebase is built for the agent, the role itself changes.
+
+TRANSITION: And the line that snapped this into focus was a tweet from Peter
+Steinberger.
+-->
+
+---
+layout: statement
+transition: fade-out
+---
+
+# Stop prompting agents?
+
+<div class="flex justify-center mt-8">
+  <img src="/peter-steinberger-loop-tweet.png" alt="Peter Steinberger tweet about designing loops that prompt coding agents" class="w-[88%] rounded-xl shadow-2xl" />
+</div>
+
+<div class="absolute bottom-4 right-8 text-xs op-40">x.com/steipete/status/2063697162748260627</div>
+
+<!--
+[pause]
+
+This is the tweet that kicked off the loop-engineering conversation a few weeks
+ago. Peter Steinberger put the shift into one sentence: stop hand-feeding the
+agent every step. Design the thing that prompts it for you.
+
+Not because prompts don't matter. Because prompts are now too small a unit of
+work.
+
+TRANSITION: So what does that actually mean in a codebase?
+-->
+
+---
+clicks: 4
+transition: fade-out
+---
+
+# What that actually means
+
+<div class="text-center text-sm op-60 -mt-2 mb-2">One idea: loop engineering — climb from one ask to a loop that runs without you.</div>
+
+<div class="grid grid-cols-5 gap-3 mt-12 items-center text-center">
+
+<div>
+<div class="text-xs op-50 mb-2">One ask</div>
+<div class="text-xl font-bold">Prompt</div>
+</div>
+
+<div v-click>
+<div class="text-xs op-50 mb-2">Reusable ask</div>
+<div class="text-xl font-bold" style="color:#ff6bed">Skill</div>
+</div>
+
+<div v-click>
+<div class="text-xs op-50 mb-2">Ask again</div>
+<div class="text-xl font-bold" style="color:#ff6bed">Loop</div>
+</div>
+
+<div v-click>
+<div class="text-xs op-50 mb-2">Finish line</div>
+<div class="text-xl font-bold" style="color:#ff6bed">Goal</div>
+</div>
+
+<div v-click>
+<div class="text-xs op-50 mb-2">Wake itself</div>
+<div class="text-xl font-bold" style="color:#ff6bed">Automation</div>
+</div>
+
+</div>
+
+<div v-after class="text-center text-xl op-75 mt-14 max-w-4xl mx-auto">
+Prompt engineering perfects one message.<br/>
+<strong style="color:#ff6bed">Loop engineering designs the loop that sends them for you.</strong>
+</div>
+
+<!--
+Here's the practical meaning — and this is one idea: loop engineering.
+
+One prompt is one request.
+CLICK — A skill is the reusable version of that request.
+CLICK — A loop runs the work-check-fix cycle without me typing "continue."
+CLICK — A goal gives the loop a finish line: keep going until this is true.
+CLICK — An automation wakes the loop up on a schedule or when something changes.
+
+Notice the direction: every rung removes me from a step. By the top, I'm not
+prompting the agent — I've designed the loop that prompts it for me. That's the
+whole shift. Prompt engineering perfects one message; loop engineering builds the
+thing that sends them.
+
+(The factory comes later — that's a different idea. Loops are one part of it.)
+
+TRANSITION: In the product, this starts looking less like chat and more like
+an operating surface.
+-->
+
+---
+transition: fade-out
+---
+
+# Loop engineering becomes an interface
+
+<div class="mt-6">
+  <TalkFramedImage src="/afk/routine-new-routine.png" alt="New routine screen for an agent loop with repository context, trigger options, connectors, behavior, notifications, and permissions" contain :shadow="false" />
+</div>
+
+<!--
+This is the shift made visible.
+
+Not "please remember to do this every week." A routine has a name, instructions,
+a repo, a trigger, connectors, behavior, notifications, permissions.
+
+That is loop engineering. You are designing the environment that will prompt
+the agent later, with the right context and the right boundaries already wired
+in.
+
+TRANSITION: And the prompt behind it can be very concrete.
+-->
+
+---
+transition: fade-out
+---
+
+# This could be the prompt
+
+```md {maxHeight:'390px'}
+You are the maintainer of the "brain" knowledge folder for the workout
+tracking app located at projects/active/<APP_NAME>.
+
+The brain folder lives at projects/active/<APP_NAME>/brain and holds
+markdown notes documenting the app's architecture, data models, features,
+conventions, and past decisions. Your single job each run: keep the brain
+in sync with what the code actually does right now.
+
+## Step 1 — Inventory
+List every file under projects/active/<APP_NAME>/brain. Build a quick map
+of the current codebase under projects/active/<APP_NAME> (source files,
+schema/migrations, config, routes, components).
+
+## Step 2 — Dispatch subagents IN PARALLEL
+Group the brain files into independent batches (by topic or folder).
+Launch one subagent per batch concurrently. Give each subagent ONLY its
+assigned brain files plus read access to the codebase. Each subagent must:
+  - Read its assigned brain note(s).
+  - Cross-reference every factual claim against the current code.
+  - Classify each note (or section) as one of:
+      CURRENT  — accurate, leave untouched.
+      STALE    — partially wrong; rewrite the affected sections to match
+                 the code as it exists now.
+      OBSOLETE — describes features, files, functions, or models that no
+                 longer exist or were renamed beyond recognition.
+  - Return a structured report: file path, classification, exact edits to
+    apply, and a one-line reason for anything marked OBSOLETE.
+
+## Step 3 — Apply changes
+  - STALE files: apply the rewrites.
+  - OBSOLETE files: move them to projects/active/<APP_NAME>/brain/_archive/
+    (do NOT hard-delete) and note the reason in the PR body.
+  - If a note is mostly current but has one dead section, edit in place
+    rather than archiving the whole file.
+
+## Step 4 — Open a PR (do not push to main)
+Commit to a branch named brain-sync/<YYYY-MM-DD>. Open a PR titled
+"Brain sync: <short summary>" whose body lists, in three sections:
+  - Updated (with a one-line diff summary per file)
+  - Archived/removed (with the reason)
+  - Reviewed, no change needed
+If nothing changed, do not open a PR — just stop.
+
+## What "outdated" means
+Treat a note as stale/obsolete when it references: removed or renamed
+functions, components, routes, or DB columns; a data model that no longer
+matches the schema/migrations; libraries or config no longer present;
+or workflows the code no longer supports. When unsure, mark STALE and
+propose a conservative edit rather than deleting.
+```
+
+<!--
+This is not magic. This could literally be the routine prompt.
+
+It says what folder owns the knowledge, what "correct" means, how to split the
+work, when to use parallel subagents, what to edit, what to archive, and when to
+stop without opening a PR.
+
+That is the whole pattern: encode the maintenance loop once, then let the system
+wake it up.
+
+TRANSITION: And when it wakes up, it looks like this.
+-->
+
+---
+transition: fade-out
+---
+
+# This is how it could look
+
+<div class="mt-7">
+  <TalkFramedImage src="/afk/routine-run-brain-sync.png" alt="Running routine for an updated docs loop, showing command batches, parallel checks, subagents, and a scheduled run panel" contain :shadow="false" />
+</div>
+
+<!--
+This is the loop actually running.
+
+Scheduled check-in. It inventories the repo. It reads the brain folder. It fans
+out into parallel work. It has running tasks. And on the side, the routine has a
+run history.
+
+The point is not that the UI is fancy. The point is that the maintenance loop is
+now operational. It is something the project can run, not something I have to
+remember to ask for.
+
+TRANSITION: And if it finds real drift, the output is a PR.
+-->
+
+---
+transition: fade-out
+---
+
+# It opens the PR for review
+
+<div class="mt-6">
+  <TalkFramedImage src="/afk/brain-sync-pr.png" alt="GitHub pull request opened by the brain sync routine, showing updated agent docs, checks, files changed, and able to merge status" contain :shadow="false" />
+</div>
+
+<!--
+This is the payoff.
+
+The loop did not just print a wall of text somewhere. It made the changes, put
+them on a branch, opened a PR, and gave me the summary in the exact shape I asked
+for: updated, archived or removed, reviewed with no change.
+
+Human back at the edge: I review the PR. The factory did the babysitting.
+
+TRANSITION: And that means the agent itself is not the interesting part.
+-->
+
+---
+layout: statement
+transition: fade-out
+---
+
+# The agent is not the factory.
+
+<v-click>
+
+# The factory is everything around it.
+
+</v-click>
+
+<div v-after class="grid grid-cols-5 gap-4 max-w-5xl mx-auto mt-10 text-left">
+  <Card variant="muted" size="sm"><div class="text-sm">Context<br/><span class="op-60">AGENTS.md, docs, skills, brain/</span></div></Card>
+  <Card variant="muted" size="sm"><div class="text-sm">Tools<br/><span class="op-60">CLI, browser, Sentry, MCP</span></div></Card>
+  <Card variant="muted" size="sm"><div class="text-sm">Feedback<br/><span class="op-60">types, lint, tests, QA</span></div></Card>
+  <Card variant="muted" size="sm"><div class="text-sm">Gates<br/><span class="op-60">worktrees, review, approvals</span></div></Card>
+  <Card variant="muted" size="sm"><div class="text-sm" style="color:#ff6bed">Loops<br/><span class="op-60">skills, goals, automations</span></div></Card>
+</div>
+
+<div v-after class="text-center text-lg op-75 mt-8 max-w-4xl mx-auto">
+<strong style="color:#ff6bed">Factory engineering optimizes every future conversation.</strong>
+</div>
+
+<!--
+[pause]
+
+CLICK — The model is the worker. The factory is everything around it: context,
+tools, tests, browser QA, hooks, worktrees, Sentry, docs, review gates — and the
+loops we just built. The loops are one part of the factory, not the whole thing.
+
+That's the second idea, and it's bigger than loop engineering. A single loop runs
+without me. The factory makes the whole repo better every time a loop runs —
+that's why factory engineering optimizes every future conversation, not just the
+next one.
+
+So when the agent fails, the question is not only "what prompt should I have
+written?" The better question is: what part of the factory allowed this mistake?
+
+TRANSITION: For my workout tracker, that becomes very concrete.
+-->
+
+---
+transition: fade-out
+---
+
+# The workout tracker factory
+
+<div class="text-center text-sm op-60 -mt-2 mb-6">Not one big agent. Four small loops that make the repo safer over time.</div>
+
+<TalkCardGrid
+  :columns="2"
+  compact
+  max-width="max-w-5xl"
+  :cards="[
+    { title: 'Docs loop', body: 'After a session, extract durable learnings: domain rules, architecture decisions, agent mistakes.' },
+    { title: 'Sentry loop', body: 'Read production errors, group duplicates, find likely files, propose the smallest safe fix.' },
+    { title: 'Architecture loop', body: 'Once a week, find one refactor that makes future agent work easier and safer.' },
+    { title: 'PR babysitter', body: 'Watch CI and review comments, draft low-risk fixes in a worktree, never merge.' },
+  ]"
+/>
+
+<div class="text-center text-lg mt-8 op-80">
+The loop is not "build an app." It is <strong style="color:#ff6bed">find a weak spot → improve the factory → hand me a PR.</strong>
+</div>
+
+<!--
+This is where the idea gets real. The workout tracker is not huge, but it has
+real product state: active workouts, rest timers, history, offline persistence,
+mobile UX. Prompting alone stops feeling safe.
+
+So I don't want one giant magic agent. I want small recurring loops.
+
+Docs loop — every session teaches the next one. Sentry loop — production errors
+turn into prepared repair tickets. Architecture loop — the repo gets easier for
+agents every week. PR babysitter — CI and review comments stop becoming my
+full-time job.
+
+For the workout tracker, the loop is not "build an app." The loop is: find a
+weak spot, improve the factory, produce a reviewable PR.
+
+TRANSITION: And that does not mean removing the human.
+-->
+
+---
+layout: statement
+transition: fade-out
+---
+
+# The point is not no humans.
+
+<v-click>
+
+# I still make product decisions.
+
+</v-click>
+
+<v-click>
+
+# The factory removes babysitting.
+
+</v-click>
+
+<!--
+[pause]
+
+This is the part I want to be very clear about.
+
+CLICK — I still decide what product should exist. I still read the PR. I still
+own the quality of what ships.
+
+CLICK — The goal is not to remove me from engineering. The goal is to remove me
+from babysitting. Reading Sentry manually. Re-running CI. Remembering to update
+docs. Asking the agent to continue. That is the work the factory can absorb.
+
+Now AFK coding makes sense: spec in, agent execution in the middle, human review
+at the edge.
+
+TRANSITION: AFK coding is already here.
 -->
 
 ---
@@ -2821,114 +3581,7 @@ message telling the agent exactly what to write.
 The PR fix is one bug. This is the factory fix — one of five custom rules I built
 exactly this way. The codebase teaches the next agent.
 
-TRANSITION: Here's the bigger thing I built this way.
--->
-
----
-layout: iframe
-url: https://alexanderop.github.io/vue-ink/playground
-transition: fade
----
-
-<!--
-One more thing before we close — vue-ink.
-
-A Vue port of Ink, the React library for terminal UIs. Built mostly AFK, with
-the loop I just walked you through. Spec, slice, ralph, refactor, QA, review.
-
-Play with it after the talk — live playground right here.
-
-TRANSITION: Here's the exact machine that built it.
--->
-
----
-transition: fade
----
-
-# How `vue-ink` was built
-
-<div class="grid grid-cols-3 gap-8 mt-16 text-center">
-
-<div>
-<div class="text-xs op-50 mb-2">Setup</div>
-<div class="text-xl font-bold" style="color: #ff6bed">Vendor the source</div>
-</div>
-
-<div>
-<div class="text-xs op-50 mb-2">Context</div>
-<div class="text-xl font-bold" style="color: #ff6bed"><code>brain/</code> vault</div>
-</div>
-
-<div>
-<div class="text-xs op-50 mb-2">Loop</div>
-<div class="text-xl font-bold" style="color: #ff6bed">Port test → RED → GREEN</div>
-</div>
-
-</div>
-
-<!--
-This is the whole machine that built vue-ink — every bucket from this talk,
-wired together.
-
-Setup, once: vendor ink, Vue core and vueuse into repos/ as read-only. The
-git-trick — the agent greps REAL source, not stale training data.
-
-Context, every session: the brain/ vault. Gotchas, principles, an api-tracker,
-a test-port-status file. brainmaxxing — persistent memory across sessions.
-
-Then the loop, per API: pick the next ink API from the tracker. Port ink's TEST
-first — their Ava scenario becomes a Vitest test at the behavior level. Run it —
-RED. Translate the impl — JSX to SFC, hooks to composables. Run — GREEN. Then
-verify scenario parity against upstream. Gap? Back to porting tests. Parity?
-Reflect the learnings back into brain/.
-
-Feedback, context, discoverability — all three buckets turning at once. Mostly AFK.
-
-TRANSITION: And it sharpens itself — automatically, after every session.
--->
-
----
-transition: fade
----
-
-# It updates its own docs in the background
-
-```bash
-# .claude/settings.json: fire on every turn end
-"Stop": [{ "hooks": [{ "command": ".claude/hooks/brain-extract.sh" }] }]
-```
-
-```bash
-# brain-extract.sh: spawn a headless Claude in the background
-read -r -d '' prompt <<'EOF'
-Read this session's transcript + brain/. Save only NEW durable learnings.
-EOF
-
-BRAIN_EXTRACT_CHILD=1 \
-  claude -p "$prompt" \
-  --permission-mode bypassPermissions &
-```
-
-<!--
-The vue-ink loop had /reflect — but I still had to REMEMBER to run it. This
-removes me from that step entirely.
-
-It's a Stop hook. Every time a turn ends, it fires. Debounced — it waits 60
-seconds of idle so it doesn't run mid-burst, and the latest one wins.
-
-Then the trick: it spawns a SECOND Claude. Headless. claude -p, the
-non-interactive print mode, in the background with an ampersand. That child gets
-one job — read this session's transcript, read brain/, write only the new
-durable learnings. Same job as /reflect, nobody pressed the button.
-
-The one gotcha — the child ALSO ends a turn, which would fire the Stop hook
-again, forever. So BRAIN_EXTRACT_CHILD=1 marks the child, and the hook bails
-when it sees that flag. One line, no recursion.
-
-So the project updates its own docs while I'm getting coffee. Every session,
-brain/ gets a little sharper — without me.
-
-TRANSITION: Let me bring both threads home.
+TRANSITION: And this is not locked to one stack or one tool.
 -->
 
 ---
@@ -3000,7 +3653,132 @@ agent is portable, and it's the engineering seniors have fought for for twenty
 years. What's good for a human team is good for an agent — it just pays off twice
 now, on every tool.
 
-TRANSITION: So here's the real point.
+TRANSITION: And the vendors aren't slowing down. Look what dropped last week.
+-->
+
+---
+transition: fade
+---
+
+# Last week: tag @Claude in Slack
+
+<div class="mt-4">
+  <TalkFramedImage src="/claude-tag/announcement-hero.png" alt="Anthropic announcement: Introducing Claude Tag, dated Jun 23 2026, with an @Claude banner over a photo of a team" :contain="false" maxHeight="56vh" :shadow="false" />
+</div>
+
+<div class="text-base op-70 mt-4 text-center max-w-3xl mx-auto">
+Give it a channel, wire up your tools and codebase — then <span style="color: #ff6bed">delegate and walk away</span>. Claude joins as a teammate that works async and remembers the channel.
+</div>
+
+<div class="absolute bottom-4 right-8 text-xs op-40">anthropic.com/news/introducing-claude-tag</div>
+
+<!--
+Quick one before I close. This dropped last week — Claude Tag.
+
+It's not a new chat window. You grant Claude a Slack channel, connect it to your
+tools and your codebase, and then anyone on the team can tag @Claude, hand it a
+task, and walk away. It works asynchronously and it remembers the channel — so
+you stop re-explaining context every time.
+
+Notice the shape: it's the exact AFK loop from this talk, just moved into the
+place your team already lives.
+
+TRANSITION: And this isn't a demo reel. Look how they actually use it.
+-->
+
+---
+transition: fade
+---
+
+# This isn't a demo. It's how they ship.
+
+<div class="h-full flex flex-col items-center justify-center -mt-12">
+
+<div class="text-8xl font-bold" style="color: #ff6bed">65%</div>
+
+<div class="mt-4 text-lg op-70">of Anthropic's product-team code now ships by tagging <span style="color: #ff6bed">@Claude</span></div>
+
+<div class="mt-10 max-w-2xl text-center text-sm op-60">
+Started in engineering — now spreading to chasing product metrics, working support tickets, and hunting the root cause of tricky bugs.
+</div>
+
+</div>
+
+<div class="absolute bottom-4 right-8 text-xs op-40">anthropic.com/news/introducing-claude-tag</div>
+
+<!--
+And here's the number that made me put this slide in. Sixty-five percent of
+their product team's code now comes through tagging @Claude. That's not a side
+experiment — that's the main way the work gets done.
+
+And it's leaking out of engineering: product folks tag it to chase metrics,
+support tags it on tickets, people tag it to find the root cause of a nasty bug.
+That's a software factory running across a whole company, not one developer at a
+terminal.
+
+TRANSITION: Pull back, and you see every vendor doing the same thing.
+-->
+
+---
+layout: statement
+transition: fade
+---
+
+# The tools keep moving toward the factory.
+
+<div class="grid grid-cols-3 gap-6 max-w-4xl mx-auto mt-10 text-left">
+
+<v-click>
+
+<Card variant="muted" size="sm">
+<div class="text-xs op-50 mb-2">2023</div>
+<div class="text-sm leading-relaxed">A chat box.<br><span class="op-60">You paste, it answers.</span></div>
+</Card>
+
+</v-click>
+
+<v-click>
+
+<Card variant="muted" size="sm">
+<div class="text-xs op-50 mb-2">2025</div>
+<div class="text-sm leading-relaxed">An agent in your repo.<br><span class="op-60">Loops, tools, subagents.</span></div>
+</Card>
+
+</v-click>
+
+<v-click>
+
+<Card variant="muted" size="sm">
+<div class="text-xs op-50 mb-2">2026</div>
+<div class="text-sm leading-relaxed">A teammate you <span style="color: #ff6bed">@-mention</span>.<br><span class="op-60">Async, proactive, shared.</span></div>
+</Card>
+
+</v-click>
+
+</div>
+
+<v-click>
+
+<div class="text-base op-70 mt-8 max-w-3xl mx-auto">
+You don't control that roadmap. But every step on it assumes the same thing — <span style="color: #ff6bed">a project an agent can actually work in</span>.
+</div>
+
+</v-click>
+
+<!--
+Zoom out and the trend is one direction. 2023, it was a chat box you pasted into.
+2025, an agent living in your repo — loops, tools, subagents, the stuff most of
+this talk was about. 2026, a teammate you @-mention in Slack that runs async.
+
+CLICK, CLICK, CLICK through the three.
+
+CLICK — and here's why I care more about this than any single feature. You don't
+control that roadmap; the vendors do, and they're shipping fast. But every one of
+those steps quietly assumes the same thing underneath: a project an agent can
+actually work in. The context, the feedback loops, the discoverability. Get that
+right and you're ready for whatever ships next.
+
+TRANSITION: Which is the real point of this whole talk.
 -->
 
 ---
@@ -3026,10 +3804,20 @@ transition: fade-out
 
 # It's about building a project an agent can build in.
 
+<v-click>
+
+<div class="text-xl op-70 mt-8 max-w-3xl mx-auto">Remember the levels at the start? Most hands were L1–L2. Context, Feedback, Discoverability are how you move <strong style="color: #ff6bed">one to the right</strong> — you move yourself.</div>
+
+</v-click>
+
 <!--
 Get the project right — context, feedback, discoverability — and you stop
 writing code by hand. Not because you type less, but because the agent can
 finally do the work, and you can finally trust it.
+
+CLICK — and the callback to where we started: most hands went up at L1 and L2.
+The three buckets are exactly how you move yourself one level to the right. Not
+the tool moving you — you, moving you.
 
 And one confession: this whole talk was framed around AI — but none of it is
 new. Testing, TDD, feature-based architecture, strict types, small components.
@@ -3038,51 +3826,6 @@ There was never a separate "AI-ready" checklist. There was just good
 engineering — and now it pays off twice.
 
 TRANSITION: So before you go — one thing.
--->
-
----
-layout: statement
-transition: fade
----
-
-# One thing. This week. Hands up.
-
-<div class="grid grid-cols-3 gap-4 max-w-4xl mx-auto mt-10">
-
-<Card glow size="sm">
-<div class="text-xs op-50 mb-1">Context</div>
-<div class="text-sm font-bold" style="color: #ff6bed">One line in AGENTS.md</div>
-</Card>
-
-<Card glow size="sm">
-<div class="text-xs op-50 mb-1">Feedback</div>
-<div class="text-sm font-bold" style="color: #ff6bed">One custom lint rule</div>
-</Card>
-
-<Card glow size="sm">
-<div class="text-xs op-50 mb-1">Discoverability</div>
-<div class="text-sm font-bold" style="color: #ff6bed">One feature folder</div>
-</Card>
-
-</div>
-
-<div class="text-base op-70 text-center mt-10">Pick one. Raise your hand if it's a <strong style="color: #ff6bed">yes.</strong></div>
-
-<!--
-[step forward, hand up, make it a pledge]
-
-Last hands of the day — and I want a commitment, not a maybe.
-
-This week, who will add ONE thing that makes your project agent-ready? Just one.
-One line in AGENTS.md. One custom lint rule. One feature folder. [scan the room]
-
-That's most of the room — good. That one thing is your "fix the factory" for
-next week, and it compounds.
-
-Come find me after and tell me which one you picked — I genuinely want to know
-what your AGENTS.md looks like.
-
-TRANSITION: Thank you.
 -->
 
 ---
