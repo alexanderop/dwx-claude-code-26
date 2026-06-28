@@ -3434,6 +3434,34 @@ CLICK — That's the whole point of the rung: I set the finish line once, and th
 loop runs to it without me. The evaluator only judges what Claude surfaces, so
 you write the condition as something the output can prove.
 
+TRANSITION: And here's what the loop sent back when it cleared the line.
+-->
+
+---
+transition: fade-out
+---
+
+# …and it comes back with the receipts
+
+<div class="text-center text-sm op-60 -mt-2 mb-6">No babysitting — the goal ran itself to the number and reported the proof.</div>
+
+<div class="flex justify-center">
+  <img src="/goal-coverage-complete.png" alt="Goal marked complete: statements 86.23%, branches 75.01%, functions 85.47%, lines 87.88%. Cleared the 5-point lift. Verified with pnpm type-check, lint, test. Goal usage 835,699 tokens, ~47 minutes." class="w-[68%] rounded-xl shadow-2xl" />
+</div>
+
+<div class="absolute bottom-6 right-8 text-xs op-40">47m 27s · 835k tokens · zero "continue" from me</div>
+
+<!--
+This is the actual transcript when the coverage goal cleared.
+
+It didn't just stop — it surfaced the evidence: statements, branches, functions,
+lines, all above the +5 line. It re-ran type-check, lint, and the full suite to
+prove it didn't cheat by breaking app code. And it tells me what it cost: about
+47 minutes and 835k tokens while I was away from the keyboard.
+
+That's the rung working — I set the finish line once, walked away, and came back
+to a higher number with the receipts to trust it.
+
 TRANSITION: And the finish line doesn't have to be a number — Peter sets a fuzzy one.
 -->
 
@@ -4094,10 +4122,13 @@ transition: fade
 
 # Thank You!
 
-<div class="flex flex-col items-center gap-4 mt-10">
-  <div class="text-xl"><span style="color: #ff6bed">alexop.dev/talks/dwx-2026</span></div>
-  <div class="text-base op-70">alexop.dev · @alexanderopalic</div>
-  <div class="text-sm op-50 mt-2">Slides, the write-ups, and the demo repos — all there.</div>
+<div class="flex flex-col items-center gap-6 mt-8">
+  <TalkQrLink image="/qr-live-slides.png" label="scan for the live slides" />
+  <div class="flex flex-col items-center gap-2">
+    <div class="text-xl"><span style="color: #ff6bed">alexop.dev/talks/dwx-2026</span></div>
+    <div class="text-base op-70">alexop.dev · @alexanderopalic</div>
+    <div class="text-sm op-50">Slides, the write-ups, and the demo repos — all there.</div>
+  </div>
 </div>
 
 <!--
