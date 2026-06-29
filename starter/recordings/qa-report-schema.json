@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "summary", "tests", "bugs", "console_errors", "metrics"],
+  "properties": {
+    "verdict": { "enum": ["HEALTHY", "MINOR_ISSUES", "CRITICAL_BUGS"] },
+    "summary": { "type": "string" },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "area", "result"],
+        "properties": {
+          "name":    { "type": "string" },
+          "area":    { "type": "string" },
+          "result":  { "enum": ["pass", "fail"] },
+          "details": { "type": "string" }
+        }
+      }
+    },
+    "bugs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "title"],
+        "properties": {
+          "id":                 { "type": "integer" },
+          "severity":           { "enum": ["critical", "major", "minor", "suggestion"] },
+          "title":              { "type": "string" },
+          "description":        { "type": "string" },
+          "steps_to_reproduce": { "type": "array", "items": { "type": "string" } },
+          "expected":           { "type": "string" },
+          "actual":             { "type": "string" }
+        }
+      }
+    },
+    "console_errors": { "type": "array", "items": { "type": "string" } },
+    "metrics": {
+      "type": "object",
+      "required": ["total_tests", "passed", "failed"],
+      "properties": {
+        "total_tests":   { "type": "integer" },
+        "passed":        { "type": "integer" },
+        "failed":        { "type": "integer" },
+        "critical_bugs": { "type": "integer" },
+        "major_bugs":    { "type": "integer" },
+        "minor_bugs":    { "type": "integer" }
+      }
+    }
+  }
+}

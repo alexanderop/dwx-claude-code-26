@@ -7,6 +7,7 @@ type TalkCard = {
   eyebrow?: string
   glow?: boolean
   icon?: string
+  logo?: string
   title?: string
   value?: string
   variant?: 'default' | 'muted' | 'success'
@@ -44,7 +45,11 @@ const gridClass = computed(() => [
     >
       <div v-if="card.icon" class="text-3xl mb-2">{{ card.icon }}</div>
       <div v-if="card.eyebrow" class="text-xs op-60 mb-1" v-html="card.eyebrow" />
-      <div v-if="card.title" class="font-bold mb-1 talk-card-grid__title" v-html="card.title" />
+      <div v-if="card.logo" class="flex items-center justify-center gap-3">
+        <img :src="card.logo" alt="" class="talk-card-grid__logo" />
+        <span v-if="card.title" class="font-bold talk-card-grid__title" v-html="card.title" />
+      </div>
+      <div v-else-if="card.title" class="font-bold mb-1 talk-card-grid__title" v-html="card.title" />
       <div v-if="card.value" class="text-3xl font-bold mb-1 talk-card-grid__value" v-html="card.value" />
       <div v-if="card.body" class="text-xs op-75" v-html="card.body" />
     </Card>
@@ -61,5 +66,12 @@ const gridClass = computed(() => [
 .talk-card-grid__value {
   color: #ff6bed;
   line-height: 1.2;
+}
+
+.talk-card-grid__logo {
+  width: 1.6em;
+  height: 1.6em;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 </style>

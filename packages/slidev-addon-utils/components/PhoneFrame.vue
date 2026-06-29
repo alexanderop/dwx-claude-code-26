@@ -69,7 +69,7 @@ const { url, title = 'Mobile app preview' } = defineProps<{
   /* Render the iframe at a wider logical viewport, then scale it down to
      fit the physical screen. This gives the mobile layout more width so
      content (day labels, action cards) stops overlapping. */
-  --zoom: 0.78;
+  --zoom: 0.6;
   width: calc(100% / var(--zoom));
   height: calc(100% / var(--zoom));
   transform: scale(var(--zoom));

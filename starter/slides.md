@@ -87,10 +87,10 @@ class: 'text-center'
   compact
   max-width="max-w-3xl"
   :cards="[
-    { title: 'Claude Code', glow: true },
-    { title: 'Cursor', glow: true },
-    { title: 'GitHub Copilot', glow: true },
-    { title: 'Codex / other', glow: true },
+    { title: 'Claude Code', logo: '/logos/claude.svg', glow: true },
+    { title: 'Cursor', logo: '/logos/cursor.svg', glow: true },
+    { title: 'GitHub Copilot', logo: '/logos/githubcopilot.svg', glow: true },
+    { title: 'Codex / other', logo: '/logos/openai.svg', glow: true },
   ]"
 />
 
@@ -690,7 +690,7 @@ TRANSITION: Don't believe me? Claude Code shows you exactly.
 <div class="text-center text-sm op-60 mb-5">Claude Code ships a slash command that shows what's eating your window.</div>
 
 <div class="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
-  <video src="/context.webm" poster="/context-poster.png" autoplay muted playsinline class="w-full block" />
+  <ReplayVideo src="/context.webm" poster="/context-poster.png" />
 </div>
 
 <!--
@@ -1452,13 +1452,7 @@ TRANSITION: But what does that buy you? Watch the agent use it.
 <div class="text-center text-sm op-60 -mt-2 mb-6">Same workout tracker — "add a rest timer, but read <code>repos/vueuse</code> first."</div>
 
 <div class="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
-  <video
-    src="/subtree.webm"
-    autoplay
-    muted
-    playsinline
-    class="w-full block"
-  />
+  <ReplayVideo src="/subtree.webm" />
 </div>
 
 <div class="text-center text-base op-70 mt-3 max-w-4xl mx-auto">
@@ -1590,14 +1584,7 @@ TRANSITION: Layer 2 — lint and format. Fast enough to run on every keystroke.
 <div class="text-center text-xs op-50 mb-1">Vite+ wraps both behind one CLI</div>
 
 <div class="max-w-lg mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
-  <video
-    src="/vp-check.webm"
-    poster="/vp-check-poster.png"
-    autoplay
-    muted
-    playsinline
-    class="w-full block"
-  />
+  <ReplayVideo src="/vp-check.webm" poster="/vp-check-poster.png" />
 </div>
 
 </div>
@@ -2527,15 +2514,7 @@ transition: fade-out
 <div class="text-center text-sm op-70 mb-6">Claude Code without the chat UI.</div>
 
 <div class="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
-  <video
-    src="/claude-p.webm"
-    poster="/claude-p-poster.png"
-    autoplay
-    muted
-    playsinline
-    controls
-    class="w-full block"
-  />
+  <ReplayVideo src="/claude-p.webm" poster="/claude-p-poster.png" />
 </div>
 
 <div class="mt-6 max-w-3xl mx-auto">
@@ -2563,10 +2542,15 @@ Actions can run it on a pull request.
 TRANSITION: But I don't want to give CI-Claude my whole machine. I want to give
 it exactly one useful tool.
 
-(PRODUCTION NOTE: the terminal clip is a condensed re-enactment of the real
-ticket-#142 QA run — real command, real numbers, real two bugs. Source is
-`recordings/claude-p.tape`; re-render with `cd starter/recordings && vhs
-claude-p.tape`. The .webm autoplays once on slide-enter.)
+(PRODUCTION NOTE: the terminal clip is a faithful re-enactment of `claude -p`
+*text mode* — real command, then it works SILENTLY (no banner, no `●` tool
+lines, no turn-by-turn; those belong to the interactive REPL) and prints exactly
+one thing: the final report. Real two bugs from the ticket-#142 QA run. Format
+verified against claude 2.1.195 / agent-browser 0.27.1. Source is
+`recordings/claude-p.tape` + `claude-p-sim.sh`; re-render with `cd
+starter/recordings && vhs claude-p.tape`, then re-grab the poster with `ffmpeg
+-y -ss 15.5 -i ../public/claude-p.webm -frames:v 1 ../public/claude-p-poster.png`.
+The .webm autoplays once on slide-enter.)
 -->
 
 
@@ -2624,108 +2608,123 @@ TRANSITION: Now the agent can explore. CI still needs a contract.
 transition: fade-out
 ---
 
-# Free text is not a CI contract
+# JSON is the contract
 
-<div class="grid grid-cols-[0.9fr_1.1fr] gap-6 items-center mt-6">
+<div class="text-center text-sm op-70 mb-3">Free text is nice for humans. CI needs a shape it can branch on — <span style="color:#ff6bed">same prompt, same JSON, every run.</span></div>
 
-<Card variant="muted">
-<div class="text-xs uppercase tracking-wide op-50 mb-3">Nice for humans</div>
-<div class="text-3xl font-bold leading-tight">"Looks good,<br/>no issues found."</div>
-<div class="text-sm op-65 mt-4">Hard for a workflow to branch on.</div>
-</Card>
-
-<Card glow>
-<div class="text-xs uppercase tracking-wide op-50 mb-3">Useful for CI</div>
-<div class="text-4xl font-bold leading-tight" style="color:#ff6bed">{ verdict,<br/>summary,<br/>bugs[] }</div>
-<div class="text-sm op-80 mt-4">A shape your script can read every time.</div>
-</Card>
-
+<div class="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+  <ReplayVideo src="/claude-p-json.webm" poster="/claude-p-json-poster.png" />
 </div>
 
-```bash
---output-format json \
---json-schema "$SCHEMA" \
-| jq '.structured_output'
-```
-
 <!--
-This is the deterministic part.
+This is the part that turns `claude -p` from a chat trick into a pipeline step.
 
-Claude exploring a website is naturally a little non-deterministic. It may click
-different links, phrase the summary differently, or notice different details.
-That's fine for exploration. It's not fine for CI.
+Claude exploring a website is naturally a little non-deterministic. It clicks
+different links, phrases the summary differently, notices different details.
+Wonderful for exploration — useless as a CI signal, because a workflow can't
+branch on the sentence "looks good, no issues found."
 
-So the contract is JSON schema. Claude still does the human-shaped work:
-explore, interpret, judge severity. But the output lands in the same shape every
-time: verdict, summary, bugs.
+So we pin the OUTPUT shape, not the behavior. `--output-format json` makes print
+mode emit one JSON object instead of prose. `--json-schema` (a real JSON Schema —
+here we `cat` the one checked into the repo) forces the answer into a shape you
+define. `--bare` keeps the run deterministic for CI. Watch the four beats:
 
-Then `jq` extracts only the structured output, and the boring script can decide
-what to do next.
+Beat one — `| jq 'keys'` — print mode doesn't hand you the report, it hands you
+an ENVELOPE: metadata (turns, cost, duration), plus `.result` and
+`.structured_output`.
 
-TRANSITION: With those three pieces, the GitHub Action becomes almost boring.
+Beat two — `| jq '.result'` — here's the answer as a STRING: an escaped JSON blob
+you'd have to re-parse yourself. Nice to have, but a bash script can't branch on
+a string.
+
+Beat three — `| jq '.structured_output | keys'` — because we passed a schema, the
+SAME answer is already parsed into your six fields. That's what `--json-schema`
+buys you: the string, parsed.
+
+Beat four — `| jq '.structured_output | {…}'` — and out falls the contract:
+verdict, metrics, bugs[]. Same fields, same types, every single run. Claude still
+does the human-shaped work — explore, judge severity — but it lands in a shape a
+dumb bash script can read deterministically.
+
+That's the whole unlock: try it on any repo tonight, pipe it into jq, and now
+the boring automation can decide what to do next.
+
+TRANSITION: And the most boring automation of all is a GitHub Action.
+
+(PRODUCTION NOTE: faithful re-enactment of `claude -p --output-format json
+--json-schema`, verified against claude 2.1.195 — json mode really does return a
+metadata envelope with `.result` (string) and `.structured_output` (object); the
+clip's `jq` is the REAL jq formatting/extracting a real-shaped envelope. The typed
+command is genuinely runnable: `--json-schema "$(cat qa-report-schema.json)"` cats
+a REAL JSON Schema (the CLI rejects anything else; the old on-screen `{verdict,
+…}` shorthand errored), and `--bare` is the docs' recommended mode for scripted
+calls. Content is the ticket-#142 QA run: real 7/7 verdict, the real copy + a11y
+bugs. Source is `recordings/claude-p-json.tape` + `claude-p-json-sim.sh` +
+`recordings/qa-report-schema.json`; re-render with `cd
+starter/recordings && vhs claude-p-json.tape`, then re-grab the poster with
+`ffmpeg -y -sseof -1 -i ../public/claude-p-json.webm -frames:v 1
+../public/claude-p-json-poster.png`. The .webm autoplays once on slide-enter.)
 -->
 
 ---
 transition: fade-out
 ---
 
-# The trigger is a label
+# Wire it into the PR
 
-<div class="text-center text-sm op-70 mb-4">You don't QA every commit. You add a <code style="color:#ff6bed">qa</code> label to the PR — the pipeline wakes up.</div>
+<div class="text-center text-sm op-70 mb-4">Every PR gets a fast pass. A <code style="color:#ff6bed">qa-verify</code> label — or an <code style="color:#ff6bed">@claude verify</code> comment — escalates to a deep, AC-driven run.</div>
 
-<div class="flex items-center justify-center gap-2 text-xs op-70 mb-5 flex-wrap">
-  <span class="px-2 py-1 rounded bg-white/5">Ticket + ACs</span>
-  <span style="color:#ff6bed">→</span>
-  <span class="px-2 py-1 rounded" style="background:rgba(255,107,237,.15);color:#ff6bed">add <code>qa</code> label</span>
-  <span style="color:#ff6bed">→</span>
-  <span class="px-2 py-1 rounded bg-white/5">Action fires</span>
-  <span style="color:#ff6bed">→</span>
-  <span class="px-2 py-1 rounded bg-white/5">verify ACs + explore</span>
-  <span style="color:#ff6bed">→</span>
-  <span class="px-2 py-1 rounded bg-white/5">PR comment</span>
+<div class="flex items-center justify-center gap-3 text-xs op-80 mb-5 flex-wrap">
+  <span class="px-2 py-1 rounded bg-white/5">every PR → <b>fast</b> smoke pass</span>
+  <span style="color:#ff6bed">·</span>
+  <span class="px-2 py-1 rounded" style="background:rgba(255,107,237,.15);color:#ff6bed"><code>qa-verify</code> label → <b>deep verify</b></span>
+  <span style="color:#ff6bed">·</span>
+  <span class="px-2 py-1 rounded bg-white/5"><code>@claude verify</code> → on-demand</span>
 </div>
 
 ```yaml
 on:
-  pull_request:
-    types: [labeled]                        # ← fires when a label is added
+  pull_request: { types: [opened, synchronize, labeled] }   # every PR → fast pass
+  issue_comment: { types: [created] }                       # "@claude verify" → deep run
 
-jobs:
-  qa:
-    if: github.event.label.name == 'qa'     # only the qa label, nothing else
-    steps:
-      - run: npm i -g agent-browser @anthropic-ai/claude-code
-      - run: agent-browser install
-      - run: ACS=$(gh issue view "$TICKET" --json body -q .body)   # ← the acceptance criteria
-      - run: claude -p "Verify these criteria, then explore: $ACS" ...
-      - run: gh pr comment "$PR" --body-file qa-report.json
+steps:
+  - uses: anthropics/claude-code-action@v1     # headless claude — same flags as `claude -p`
+    with:
+      prompt: ${{ steps.prompt.outputs.value }}             # PR's Acceptance Criteria, injected
+      claude_args: |
+        --allowedTools "Bash,Write,Read,Glob,Grep"          # agent-browser runs via Bash
+        --json-schema '${{ steps.schema.outputs.value }}'   # the contract — a committed file
+        --append-system-prompt "$QA_SYSTEM_PROMPT"
+
+  - uses: actions/github-script@v9             # verdict → commit status:
+    # HEALTHY ✅ · MINOR_ISSUES ⏳ pending · CRITICAL_BUGS ❌ red check
 ```
 
 <SourceRef href="alexop.dev/posts/automated-qa-claude-code-agent-browser-cli-github-actions" />
 
 <!--
-Here's the trigger — and it's the whole point.
+This is the real wiring — and it surprises people.
 
-You do NOT run a ten-minute browser agent on every commit. That's slow and
-expensive. Instead it's opt-in: when a PR is ready for a real QA pass, you add
-one label — `qa`. Adding the label is the human saying "this one's worth it."
+It is NOT opt-in only. Every pull request gets an automatic FAST browser pass —
+open the app, smoke the main flows, post a verdict. Then you escalate on demand:
+add the `qa-verify` label, or comment `@claude verify` on the PR, and the same
+job runs in DEEP mode — it pulls the Acceptance Criteria out of the PR body and
+verifies each one against the live app before exploring. The strip up top is the
+three tiers: fast on every PR, deep on a label, on-demand from a comment.
 
-The YAML: `on: pull_request, types: [labeled]` means the workflow fires the
-moment a label lands. The `if` guard checks it's actually the `qa` label and not
-some other tag. Then: install agent-browser and Claude Code; pull the acceptance
-criteria straight off the linked ticket with `gh issue view` — that's the
-`$ACS` line, the contract made literal; feed them into the `claude -p` prompt
-("verify these, THEN explore"); and post the structured report back as a PR
-comment. The ACs aren't vibes — they're text piped from the issue.
+Notice what's running: not a hand-rolled `claude -p` install — the official
+`anthropics/claude-code-action`. But look at `claude_args`: it's the exact same
+primitives from the last two slides. `--allowedTools "Bash,..."` is how
+agent-browser gets in — through that one Bash door. And `--json-schema` points at
+a schema file checked into the repo. That's the contract from the previous slide,
+now versioned alongside the code.
 
-So the flow on the strip up top: ticket with ACs, you add the label, the Action
-fires, the agent does both jobs — verify the ACs and explore — and you get a QA
-report on the PR. Like having a QA engineer you summon with a label.
+And here's the branch-on-JSON payoff. The last step parses `structured_output`
+and writes a COMMIT STATUS from the verdict: HEALTHY is a green check,
+MINOR_ISSUES is pending, CRITICAL_BUGS is a red check that fails the run. The
+free-text "looks good" could never do that. The JSON verdict can.
 
-The schema, the longer prompt, the exact jq — all in the blog post. The slide
-just needs the mental model: a label summons a QA engineer.
-
-TRANSITION: But this is still a signal, not a human replacement.
+TRANSITION: But a red check is still a signal, not a human replacement.
 -->
 
 ---
@@ -3240,13 +3239,54 @@ transition: fade-out
 
 # The three buckets compound
 
-<v-clicks>
+<div class="flex justify-center mt-12">
+<RoughSvg :width="870" :height="200" :padding="32">
 
-- **Context** — AGENTS.md, skills, hooks, brain/ keep the window tight
-- **Feedback** — 15 layers + the agent as a user keep it honest
-- **Discoverability** — vertical slices keep it local
+  <!-- 01 — Context -->
+  <g v-click="1">
+    <RoughRect :x="0" :y="0" :width="250" :height="140" variant="accent" />
+    <RoughText :x="20" :y="26" variant="title" textAnchor="start">01</RoughText>
+    <text x="125" y="66" text-anchor="middle" font-family="'Geist', sans-serif" font-size="24px" font-weight="700" fill="#ff6bed">Context</text>
+    <RoughText :x="125" :y="98" variant="detail">AGENTS.md · skills · hooks</RoughText>
+    <RoughText :x="125" :y="118" variant="detail">brain/ keeps the window tight</RoughText>
+  </g>
 
-</v-clicks>
+  <!-- 01 → 02 -->
+  <g v-click="2">
+    <RoughArrow :x1="252" :y1="70" :x2="308" :y2="70" />
+  </g>
+
+  <!-- 02 — Feedback -->
+  <g v-click="2">
+    <RoughRect :x="310" :y="0" :width="250" :height="140" variant="accent" />
+    <RoughText :x="330" :y="26" variant="title" textAnchor="start">02</RoughText>
+    <text x="435" y="66" text-anchor="middle" font-family="'Geist', sans-serif" font-size="24px" font-weight="700" fill="#ff6bed">Feedback</text>
+    <RoughText :x="435" :y="98" variant="detail">15 layers + agent-as-a-user</RoughText>
+    <RoughText :x="435" :y="118" variant="detail">keeps it honest</RoughText>
+  </g>
+
+  <!-- 02 → 03 -->
+  <g v-click="3">
+    <RoughArrow :x1="562" :y1="70" :x2="618" :y2="70" />
+  </g>
+
+  <!-- 03 — Discoverability -->
+  <g v-click="3">
+    <RoughRect :x="620" :y="0" :width="250" :height="140" variant="accent" />
+    <RoughText :x="640" :y="26" variant="title" textAnchor="start">03</RoughText>
+    <text x="745" y="66" text-anchor="middle" font-family="'Geist', sans-serif" font-size="22px" font-weight="700" fill="#ff6bed">Discoverability</text>
+    <RoughText :x="745" :y="98" variant="detail">vertical slices</RoughText>
+    <RoughText :x="745" :y="118" variant="detail">keeps it local</RoughText>
+  </g>
+
+  <!-- compounding baseline -->
+  <g v-click="3">
+    <RoughLine :x1="0" :y1="170" :x2="870" :y2="170" stroke="rgba(255,255,255,0.25)" />
+    <text x="435" y="194" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="14px" fill="rgba(255,255,255,0.55)">each bucket makes the next worth more</text>
+  </g>
+
+</RoughSvg>
+</div>
 
 <!--
 [pause]
@@ -3437,7 +3477,6 @@ TRANSITION: a goal adds the finish line, so the loop can stop itself.
 
 ---
 transition: fade-out
-clicks: 4
 ---
 
 # A goal gives the loop a finish line
@@ -3445,14 +3484,7 @@ clicks: 4
 <div class="text-center text-sm op-60 -mt-2 mb-6">Workout tracker — "raise test coverage by 5 points," then I walk away.</div>
 
 <div class="max-w-2xl mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
-  <video
-    src="/goal.webm"
-    poster="/goal-poster.png"
-    autoplay
-    muted
-    playsinline
-    class="w-full block"
-  />
+  <ReplayVideo src="/goal.webm" poster="/goal-poster.png" />
 </div>
 
 <div class="text-center text-base op-70 mt-3 max-w-4xl mx-auto">
@@ -3539,76 +3571,8 @@ That's the craft of the rung — even a soft condition becomes runnable once you
 tell the loop how to prove progress: tests run, commits land, the progress file
 grows. Then you walk away and it refactors until it's there.
 
-TRANSITION: A loop and a goal still run one agent. The next rung runs a whole team.
--->
-
----
-transition: fade-out
-clicks: 3
----
-
-# A workflow runs a whole team at once
-
-<div class="text-center text-sm op-60 -mt-2 mb-6">Workout tracker — one ask becomes many agents, fanned out in parallel and cross-checked.</div>
-
-```bash
-ultracode audit every feature slice in the workout tracker for
-missing tests and a11y issues — one agent per slice, in parallel,
-then verify each finding before reporting it back to me.
-```
-
-<div class="grid grid-cols-3 gap-4 mt-10">
-
-<div v-click>
-<Card variant="muted" size="sm">
-<div class="text-sm font-bold" style="color:#ff6bed">Fans out</div>
-<div class="text-sm op-75 mt-1">One prompt spawns many subagents — each takes a slice, all running at once instead of one after another.</div>
-</Card>
-</div>
-
-<div v-click>
-<Card variant="muted" size="sm">
-<div class="text-sm font-bold" style="color:#ff6bed">Cross-checks</div>
-<div class="text-sm op-75 mt-1">Findings get verified by skeptic agents — plausible-but-wrong claims get refuted before they ever reach me.</div>
-</Card>
-</div>
-
-<div v-click>
-<Card variant="muted" size="sm">
-<div class="text-sm font-bold" style="color:#ff6bed">Synthesizes</div>
-<div class="text-sm op-75 mt-1">Runs in the background and merges everything into one report — I get the conclusion, not the file dumps.</div>
-</Card>
-</div>
-
-</div>
-
-<div v-after class="text-center text-lg op-75 mt-10 max-w-4xl mx-auto">
-<code>loop</code> re-sends the prompt · <code>goal</code> adds a finish line · <strong style="color:#ff6bed">workflow</strong> adds a team.
-</div>
-
-<!--
-The third rung. A loop re-sends one prompt; a goal gives that loop a finish line —
-but both still run a single agent, one turn at a time. A workflow breaks that
-ceiling: one ask becomes a team.
-
-The switch is the word "ultracode" — it tells Claude to stop working solo and
-instead write an orchestration script that dispatches subagents. The primitive
-is the workflow; ultracode is the on-switch.
-
-CLICK — It fans out: one agent per feature slice, all running in parallel, so ten
-slices get audited in the time one would have taken.
-CLICK — It cross-checks: every finding is handed to skeptic agents told to refute
-it. The plausible-but-wrong stuff dies before I ever see it — that's the part a
-single agent can't do to itself.
-CLICK — It synthesizes: the whole thing runs in the background and comes back as
-one merged report. I get the conclusion, not a pile of transcripts.
-
-So the trio reads cleanly: loop re-sends the prompt, goal adds a finish line,
-workflow adds a team. The cost is real — it can spawn dozens of agents and burn a
-lot of tokens — so it's opt-in, for audits and migrations, not quick edits.
-
-TRANSITION: In the product, all of this starts looking less like chat and more
-like an operating surface.
+TRANSITION: A loop and a goal still run one agent. In the product, all of this
+starts looking less like chat and more like an operating surface.
 -->
 
 ---

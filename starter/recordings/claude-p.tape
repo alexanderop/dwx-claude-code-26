@@ -31,8 +31,12 @@ Type `  --allowedTools "Bash(agent-browser*)"`
 Sleep 700ms
 Enter
 
-# the shim streams the condensed-but-truthful print-mode output
-Sleep 9s
+# `-p` works silently here (opening the page, snapshotting, judging) — this
+# pause stands in for that work. Real text mode prints nothing until it's done.
+Sleep 3s
+
+# then the one thing print mode emits: the final report
+Sleep 5s
 
 # hold the final frame
 Sleep 2500ms
