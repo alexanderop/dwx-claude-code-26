@@ -158,28 +158,9 @@ Triumph or disaster? I don't know yet.
 What I know: this is the world we ship into. Major OSS rewritten in two weeks
 by a machine. The pace is real. Not slowing down.
 
-TRANSITION: And that pace? It's relentless. You feel it every morning.
--->
-
----
-layout: center
-class: 'text-center'
----
-
-<TalkFramedImage src="/claude-update-cat.png" max-height="22rem" :shadow="false" />
-
-<!--
-[let it land, get the laugh]
-
-This is the lived experience. You wake up, pour your coffee — there's another
-Claude update. New model, new primitive, new way to do the thing you just
-learned yesterday.
-
-Tinfoil hat on, half-paranoid, trying to keep up.
-
-I'm not going to teach you every feature — half of them will change by the time
-you get home. I'm going to teach you the WORKFLOW underneath, the part that
-doesn't change.
+And that pace is relentless — you feel it every morning. So I'm not going to
+teach you every feature; half of them will change by the time you get home.
+I'm going to teach you the WORKFLOW underneath, the part that doesn't change.
 
 TRANSITION: So here is the line everyone keeps repeating.
 -->
@@ -477,10 +458,13 @@ TRANSITION: Let me make the biggest one concrete.
 -->
 
 ---
-layout: iframe
-url: https://workout-tracker-ten-pi.vercel.app/
+layout: center
+hideFooter: true
 transition: fade
+class: bg-black
 ---
+
+<PhoneFrame url="https://workout-tracker-ten-pi.vercel.app/" title="Workout tracker PWA" />
 
 <!--
 This is the workout tracker. Offline-first Vue PWA: log workouts, track sets,
@@ -565,22 +549,30 @@ transition: fade
 
 <v-click>
 
-<div class="text-xl op-70 mt-8 max-w-3xl mx-auto">When the agent slips, fix the <strong style="color: #ff6bed">factory — the project itself</strong> — not just the one PR.</div>
+<div class="text-xl op-70 mt-8 max-w-3xl mx-auto">First the <strong style="color: #ff6bed">factory — structure, linting, tests</strong> — <em>then</em> let the agent add features.</div>
 
 </v-click>
 
 <!--
 [pause]
 
-The instinct is to keep correcting the agent's output, prompt by prompt. That's
-a treadmill. So I flipped it: stop correcting turn by turn. Spend the time up
-front instead — make the project itself the kind of place where the agent does
-the right thing by default, and where I can instantly tell if it didn't.
+My first instinct was the obvious one: vibe-code a feature, then clean up the
+mess afterwards — fix the giant component, add the missing test, patch the
+types, PR by PR. That's a treadmill.
 
-CLICK — and the phrase to hold onto for the whole hour: when the agent gets it
-wrong, fix the FACTORY, not the PR. The project, the rules, the structure — so
-that whole class of mistake can't happen again. We'll come back to it, hard, in
-the last act.
+So I flipped the order. Instead of building features first and fixing structure
+later, I did it the other way round: BEFORE asking the agent for a single
+feature, I spent the time setting up the project properly — the structure,
+linting, tests, the conventions. The factory first.
+
+THEN I added features. And because the factory was already in place, the agent
+built the right thing by default — and the moment it didn't, linting and tests
+told me instantly.
+
+CLICK — that's the phrase to hold onto for the whole hour: build the FACTORY
+first, then the features. When the agent slips, you fix the factory — the
+project itself — so that whole class of mistake can't happen again. We'll come
+back to it, hard, in the last act.
 
 Same insight a senior dev has about any codebase: a good codebase makes good
 changes easy and bad changes loud.
@@ -697,30 +689,9 @@ TRANSITION: Don't believe me? Claude Code shows you exactly.
 
 <div class="text-center text-sm op-60 mb-5">Claude Code ships a slash command that shows what's eating your window.</div>
 
-<Card variant="muted" class="max-w-4xl mx-auto">
-
-<div class="font-mono text-xs op-50 mb-3">> /context</div>
-
-<div class="flex h-8 rounded overflow-hidden mb-1 border border-white/10">
-  <div style="width: 32.4%; background: #ff6bed"></div>
-  <div style="width: 35.2%; background: #60a5fa"></div>
-  <div style="width: 4.6%; background: #a78bfa"></div>
-  <div style="width: 5.7%; background: #fb923c"></div>
-  <div style="width: 21.7%; background: #fbbf24"></div>
-  <div style="width: 0.4%; background: rgba(255,255,255,0.15)"></div>
+<div class="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+  <video src="/context.webm" poster="/context-poster.png" autoplay muted playsinline class="w-full block" />
 </div>
-<div class="text-center text-xs op-60 mb-5">28k of 1M tokens used. Share of the <strong>used</strong> portion.</div>
-
-<div class="grid grid-cols-2 gap-x-8 gap-y-2 text-sm">
-  <div class="flex items-center gap-3"><span class="w-3 h-3 rounded-sm" style="background: #ff6bed"></span> System prompt <span class="op-50 ml-auto">9.1k <span class="op-50">(0.9%)</span></span></div>
-  <div class="flex items-center gap-3"><span class="w-3 h-3 rounded-sm" style="background: #60a5fa"></span> System tools <span class="op-50 ml-auto">9.9k <span class="op-50">(1.0%)</span></span></div>
-  <div class="flex items-center gap-3"><span class="w-3 h-3 rounded-sm" style="background: #a78bfa"></span> Custom agents <span class="op-50 ml-auto">1.3k <span class="op-50">(0.1%)</span></span></div>
-  <div class="flex items-center gap-3"><span class="w-3 h-3 rounded-sm" style="background: #fb923c"></span> Memory files (AGENTS.md) <span class="op-50 ml-auto">1.6k <span class="op-50">(0.2%)</span></span></div>
-  <div class="flex items-center gap-3"><span class="w-3 h-3 rounded-sm" style="background: #fbbf24"></span> Skills <span class="op-50 ml-auto">6.1k <span class="op-50">(0.6%)</span></span></div>
-  <div class="flex items-center gap-3"><span class="w-3 h-3 rounded-sm" style="background: rgba(255,255,255,0.15)"></span> Free space <span class="op-50 ml-auto">972k <span class="op-50">(97.2%)</span></span></div>
-</div>
-
-</Card>
 
 <!--
 Type /context in Claude Code. It draws this. Pink + blue = system prompt +
@@ -833,24 +804,52 @@ transition: fade
 Vercel tested how agents learn <span style="color: #ff6bed">Next.js 16</span> APIs they were not trained on.
 </div>
 
-<div class="grid grid-cols-3 gap-5 max-w-5xl mx-auto">
+<div class="grid grid-cols-3 gap-5 max-w-6xl mx-auto">
 
 <Card variant="muted" size="sm">
-<div class="text-xs op-50 mb-2">Baseline + default skill</div>
-<div class="text-5xl font-bold" style="color: #ef4444">53%</div>
-<div class="text-sm op-70 mt-3">The skill existed. The agent often never opened it.</div>
+<div class="flex items-baseline justify-between mb-2">
+<span class="text-xs op-50">Default skill</span>
+<span class="text-4xl font-bold leading-none" style="color: #ef4444">53%</span>
+</div>
+
+<div class="flex flex-col gap-1 text-xs opacity-50" style="font-family:'Geist Mono',monospace">
+<div class="flex items-center gap-1.5"><div class="i-vscode-icons:default-folder w-3.5 h-3.5 shrink-0" /><span>.claude/skills/</span></div>
+<div class="flex items-center gap-1.5 pl-4"><div class="i-vscode-icons:default-folder w-3.5 h-3.5 shrink-0" /><span>nextjs-docs/</span></div>
+<div class="flex items-center gap-1.5 pl-8"><div class="i-vscode-icons:file-type-markdown w-3.5 h-3.5 shrink-0" /><span>SKILL.md</span><span class="ml-auto" style="color:#ef4444;font-size:0.6rem">never opened</span></div>
+</div>
+
+<div class="text-xs op-60 mt-2">It was right there. The agent had to <em>decide</em> to look — and didn't.</div>
 </Card>
 
 <Card variant="muted" size="sm">
-<div class="text-xs op-50 mb-2">Skill + explicit instruction</div>
-<div class="text-5xl font-bold" style="color: #fbbf24">79%</div>
-<div class="text-sm op-70 mt-3">Better, but fragile: wording changed the behavior.</div>
+<div class="flex items-baseline justify-between mb-2">
+<span class="text-xs op-50">Skill + explicit instruction</span>
+<span class="text-4xl font-bold leading-none" style="color: #fbbf24">79%</span>
+</div>
+
+<div class="flex flex-col gap-1 text-xs" style="font-family:'Geist Mono',monospace">
+<div class="flex items-center gap-1.5"><div class="i-vscode-icons:file-type-markdown w-3.5 h-3.5 shrink-0" /><span>AGENTS.md</span><span class="ml-auto op-50" style="font-size:0.6rem">"invoke the skill"</span></div>
+<div class="flex items-center gap-1.5"><div class="i-vscode-icons:default-folder-opened w-3.5 h-3.5 shrink-0" /><span>.claude/skills/nextjs-docs/</span></div>
+<div class="flex items-center gap-1.5 pl-8"><div class="i-vscode-icons:file-type-markdown w-3.5 h-3.5 shrink-0" /><span>SKILL.md</span><span class="ml-auto" style="color:#fbbf24;font-size:0.6rem">opened</span></div>
+</div>
+
+<div class="text-xs op-60 mt-2">Now it opens — but "invoke first" vs "explore first" swung the result.</div>
 </Card>
 
 <Card glow size="sm">
-<div class="text-xs op-50 mb-2">Compressed AGENTS.md docs index</div>
-<div class="text-5xl font-bold" style="color: #ff6bed">100%</div>
-<div class="text-sm op-70 mt-3">No trigger decision. Always available. Clear retrieval map.</div>
+<div class="flex items-baseline justify-between mb-2">
+<span class="text-xs op-50">Compressed AGENTS.md index</span>
+<span class="text-4xl font-bold leading-none" style="color: #ff6bed">100%</span>
+</div>
+
+<div class="flex flex-col gap-1 text-xs" style="font-family:'Geist Mono',monospace">
+<div class="flex items-center gap-1.5"><div class="i-vscode-icons:file-type-markdown w-3.5 h-3.5 shrink-0" /><span>AGENTS.md</span><span class="ml-auto" style="color:#ff6bed;font-size:0.6rem">docs index ↓</span></div>
+<div class="flex items-center gap-1.5"><div class="i-vscode-icons:folder-type-docs-opened w-3.5 h-3.5 shrink-0" /><span>.next-docs/</span></div>
+<div class="flex items-center gap-1.5 pl-8"><div class="i-vscode-icons:file-type-markdown w-3.5 h-3.5 shrink-0" /><span>use-cache.mdx</span><span class="ml-auto" style="color:#34d399;font-size:0.6rem">read</span></div>
+<div class="flex items-center gap-1.5 pl-8"><div class="i-vscode-icons:file-type-markdown w-3.5 h-3.5 shrink-0" /><span>connection.mdx</span><span class="ml-auto" style="color:#34d399;font-size:0.6rem">read</span></div>
+</div>
+
+<div class="text-xs op-60 mt-2">No decision. The map is always in context; it reads the file it needs.</div>
 </Card>
 
 </div>
@@ -860,7 +859,7 @@ Put <strong style="color: #ff6bed">framework docs indexes</strong> in AGENTS.md.
 Put <strong style="color: #ff6bed">repeatable actions</strong> in skills.
 </div>
 
-<div class="absolute bottom-4 right-8 text-xs op-40">vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals</div>
+<SourceRef href="vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals" />
 
 <!--
 This is the nuance I want to add to the simple rule.
@@ -1420,9 +1419,7 @@ git subtree add --prefix=repos/vueuse \
 Two follow-ups: hide <code>repos/</code> from your editor (<code>autoImportFileExcludePatterns</code> + <code>files.exclude</code>) so it never auto-imports internals — and have the agent <strong style="color:#ff6bed">distill once</strong> into <code>agent-patterns/vueuse.md</code>, so next session loads that, not 800 composables.
 </div>
 
-<div class="absolute bottom-4 right-8 text-xs op-40">
-Credit: <a href="https://effect.website/blog/the-one-weird-git-trick-that-makes-coding-agents-more-effect-ive/">effect.website — The One Weird Git Trick</a>
-</div>
+<SourceRef label="Credit" href="effect.website — The One Weird Git Trick" />
 
 <!--
 One command. Vendors VueUse into your repo as a squashed subtree. Then one line
@@ -1444,6 +1441,50 @@ doesn't auto-import VueUse internals into your app — four lines in
 .vscode/settings.json — and once the agent has explored the source, have it
 distill what it learned into agent-patterns/vueuse.md so the next session loads
 that instead of re-reading 800 composables.
+
+TRANSITION: But what does that buy you? Watch the agent use it.
+-->
+
+---
+
+# Then it writes like VueUse
+
+<div class="text-center text-sm op-60 -mt-2 mb-6">Same workout tracker — "add a rest timer, but read <code>repos/vueuse</code> first."</div>
+
+<div class="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+  <video
+    src="/subtree.webm"
+    autoplay
+    muted
+    playsinline
+    class="w-full block"
+  />
+</div>
+
+<div class="text-center text-base op-70 mt-3 max-w-4xl mx-auto">
+It doesn't guess the API — it <strong style="color:#ff6bed">reads the source</strong> and mirrors the real shape.
+</div>
+
+<!--
+This is the payoff of the subtree. I ask for a feature — a rest timer that
+pauses when the tab is hidden — and I add one constraint: mirror the patterns in
+repos/vueuse, don't guess the API.
+
+Watch what it does. It doesn't reach for training-data memory or web search. It
+greps the vendored source, opens the closest real composables — useIntervalFn,
+useDocumentVisibility — and reads how VueUse actually builds them. Then it writes
+useRestTimer with the same shape: the { isActive, pause, resume } controls,
+MaybeRefOrGetter plus toValue for the duration, tryOnScopeDispose for cleanup.
+
+Nothing imported from repos/ — it's reference, not a dependency. The result reads
+like it was lifted from the library, because the agent learned from the library.
+That's the whole trick: pattern matching beats prompting, so give it real
+patterns to match.
+
+(Condensed re-enactment of a real run — the composables, the API shape, and the
+constraints are all real. Source: recordings/subtree.tape; re-render with
+`cd starter/recordings && vhs subtree.tape`. The .webm autoplays once on
+slide-enter.)
 
 TRANSITION: Context loads the room. Bucket two — how the agent knows when it's wrong.
 -->
@@ -1897,7 +1938,7 @@ so RED can't read GREEN's intentions.
 
 </div>
 
-<div class="absolute bottom-4 right-8 text-xs op-40">alexop.dev/posts/custom-tdd-workflow-claude-code-vue</div>
+<SourceRef href="alexop.dev/posts/custom-tdd-workflow-claude-code-vue" />
 
 <!--
 Layer 4 trusted the browser. This slide is the honest gap behind it: the abstract
@@ -2107,7 +2148,7 @@ transition: fade-out
 
 </div>
 
-<div class="absolute bottom-4 right-8 text-xs op-40">alexop.dev/posts/exploratory-qa-ai-agents-site-agnostic-harness</div>
+<SourceRef href="alexop.dev/posts/exploratory-qa-ai-agents-site-agnostic-harness" />
 
 <!--
 [breathe]
@@ -2660,7 +2701,7 @@ jobs:
       - run: gh pr comment "$PR" --body-file qa-report.json
 ```
 
-<div class="absolute bottom-12 right-8 text-xs op-40">alexop.dev/posts/automated-qa-claude-code-agent-browser-cli-github-actions</div>
+<SourceRef href="alexop.dev/posts/automated-qa-claude-code-agent-browser-cli-github-actions" />
 
 <!--
 Here's the trigger — and it's the whole point.
@@ -3254,7 +3295,7 @@ transition: fade-out
   <img src="/peter-steinberger-loop-tweet.png" alt="Peter Steinberger tweet about designing loops that prompt coding agents" class="w-[88%] rounded-xl shadow-2xl" />
 </div>
 
-<div class="absolute bottom-4 right-8 text-xs op-40">x.com/steipete/status/2063697162748260627</div>
+<SourceRef href="x.com/steipete/status/2063697162748260627" />
 
 <!--
 [pause]
@@ -3483,7 +3524,7 @@ transition: fade-out
   <img src="/peter-steinberger-goal-tweet.png" alt="Peter Steinberger tweet: /goal refactor until you are happy with the architecture. ensure you live test after each significant step and autoreview/commit. track progress in /tmp/refactor-{projectname}.md" class="w-[80%] rounded-xl shadow-2xl" />
 </div>
 
-<div class="absolute bottom-4 right-8 text-xs op-40">x.com/steipete</div>
+<SourceRef href="x.com/steipete" />
 
 <!--
 My coverage goal had a hard number. Peter's doesn't — and it still works.
@@ -3994,7 +4035,7 @@ Copilot now ships <span style="color: #ff6bed">custom agents with restricted too
 
 </v-click>
 
-<div class="absolute bottom-4 right-8 text-xs op-40">alexop.dev/posts/whats-new-vscode-copilot-january-2026</div>
+<SourceRef href="alexop.dev/posts/whats-new-vscode-copilot-january-2026" />
 
 <!--
 I used Vue and Nuxt because that's my world, but nothing here is Vue-specific.
@@ -4019,6 +4060,23 @@ TRANSITION: And the vendors aren't slowing down. Look what dropped last week.
 -->
 
 ---
+layout: center
+class: 'text-center'
+---
+
+<TalkFramedImage src="/claude-update-cat.png" max-height="22rem" :shadow="false" />
+
+<!--
+[let it land, get the laugh]
+
+This is the lived experience. You wake up, pour your coffee — there's another
+Claude update. New model, new primitive, new way to do the thing you just
+learned yesterday. Tinfoil hat on, half-paranoid, trying to keep up.
+
+TRANSITION: Right on cue — this dropped last week.
+-->
+
+---
 transition: fade
 ---
 
@@ -4032,7 +4090,7 @@ transition: fade
 Give it a channel, wire up your tools and codebase — then <span style="color: #ff6bed">delegate and walk away</span>. Claude joins as a teammate that works async and remembers the channel.
 </div>
 
-<div class="absolute bottom-4 right-8 text-xs op-40">anthropic.com/news/introducing-claude-tag</div>
+<SourceRef href="anthropic.com/news/introducing-claude-tag" />
 
 <!--
 Quick one before I close. This dropped last week — Claude Tag.
@@ -4066,7 +4124,7 @@ Started in engineering — now spreading to chasing product metrics, working sup
 
 </div>
 
-<div class="absolute bottom-4 right-8 text-xs op-40">anthropic.com/news/introducing-claude-tag</div>
+<SourceRef href="anthropic.com/news/introducing-claude-tag" />
 
 <!--
 And here's the number that made me put this slide in. Sixty-five percent of

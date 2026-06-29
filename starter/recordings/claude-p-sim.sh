@@ -8,12 +8,12 @@
 #
 # Sourced by claude-p.tape, which then types the genuine command. Defining a
 # shell function named `claude` shadows the real binary for the recording only.
+#
+# Print mode (`claude -p`) has no REPL startup banner — that's the slide's whole
+# point ("Claude Code without the chat UI") — so there's deliberately no
+# cc_banner here. We still source cc-lib.sh for the one shared palette.
 
-PINK='\033[38;2;255;107;237m'
-DIM='\033[2m'
-GREEN='\033[32m'
-BOLD='\033[1m'
-RST='\033[0m'
+source ./cc-lib.sh
 
 claude() {
   printf "\n"

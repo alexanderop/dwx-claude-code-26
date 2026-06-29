@@ -8,7 +8,7 @@ Require bash
 Set Shell "bash"
 Set FontSize 23
 Set Width 1280
-Set Height 620
+Set Height 960
 Set Padding 28
 Set Margin 0
 Set Theme "Catppuccin Mocha"
