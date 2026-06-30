@@ -4031,6 +4031,35 @@ layout: center
 class: 'text-center'
 ---
 
+# This very deck got the treatment
+
+<div class="mt-6">
+  <TalkFramedImage src="/slides-review-workflow.png" alt="A multi-lens review workflow running over the DWX 2026 slide deck: 6 reviewers reading through distinct lenses, an adversarial verify pass, and a synthesize phase — 41 of 49 agents, 12m32s elapsed" max-height="26rem" :shadow="false" />
+</div>
+
+<div class="text-base op-70 mt-4 text-center max-w-3xl mx-auto">
+A workflow fanned out <span style="color: #ff6bed">six reviewers</span> across this deck — one per lens — then adversarially verified every finding. AFK, on the talk itself.
+</div>
+
+<!--
+And yes — I ate my own dog food on this talk. Before I shipped these slides, I
+fanned out a multi-lens review workflow over the whole deck: six reviewers, each
+reading all seventy slides through a different lens — narrative, technical
+accuracy, brand consistency, hygiene, references, and a skeptical audience member
+— then an adversarial verify pass on every single finding before synthesis.
+
+Forty-nine agents, twelve minutes, running in the background while I did something
+else. That's the software factory from Act III, pointed at the talk you're
+watching right now.
+
+TRANSITION: And the vendors aren't slowing down. Look what dropped last week.
+-->
+
+---
+layout: center
+class: 'text-center'
+---
+
 <TalkFramedImage src="/claude-update-cat.png" max-height="22rem" :shadow="false" />
 
 <!--
