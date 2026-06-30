@@ -15,6 +15,25 @@
   --brand-border: rgb(171, 75, 153);
 }
 
+/* Light mode — only used for the "dark or light?" opener joke.
+   Scoped to html:not(.dark) so the dark deck is untouched; this block
+   wins over :root by specificity when Slidev drops the .dark class. */
+html:not(.dark) {
+  --color-fill: 255, 255, 255;
+  --color-text-base: 33, 39, 55;
+  --color-accent: 214, 51, 184;
+  --color-card: 248, 240, 251;
+  --color-card-muted: 250, 220, 245;
+  --color-border: 234, 170, 222;
+
+  --brand-bg: rgb(255, 255, 255);
+  --brand-text: rgb(33, 39, 55);
+  --brand-accent: rgb(214, 51, 184);
+  --brand-card: rgb(248, 240, 251);
+  --brand-card-muted: rgb(250, 220, 245);
+  --brand-border: rgb(234, 170, 222);
+}
+
 .slidev-layout {
   h1 + p {
     @apply -mt-2 opacity-50 mb-4;

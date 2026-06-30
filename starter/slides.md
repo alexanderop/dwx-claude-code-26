@@ -4,6 +4,7 @@ addons:
   - '@alexop/slidev-addon-utils'
 title: 'Building Without Typing'
 transition: slide-left
+colorSchema: auto
 mdc: true
 drawings:
   persist: false
@@ -47,6 +48,32 @@ DWX — Developer Week. One breath, then the title.
 This isn't a tooling tour. It's two threads braided together: the general
 Claude Code workflow that works in any codebase, and the specific moves that
 make a Vue project one the agent can build in. One hour, one story.
+
+TRANSITION: Quick intro, then where we are in 2026.
+-->
+
+---
+layout: center
+class: 'text-center'
+---
+
+# First, a serious question
+
+<div class="text-xl op-70 mt-2 mb-10">
+  Should I run these slides in <span style="color: var(--brand-accent); font-weight: 700">dark</span> or light mode?
+</div>
+
+<ThemeJokeToggle />
+
+<div class="text-sm op-50 mt-10">
+  Yes, the whole deck actually switches. No, I will not be taking a vote.
+</div>
+
+<!--
+The icebreaker. Click the toggle live — the entire theme flips, light and back.
+Milk it for the laugh, land on dark, move on.
+
+"This is the only design decision I made by hand today. Everything else? You'll see."
 
 TRANSITION: Quick intro, then where we are in 2026.
 -->

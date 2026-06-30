@@ -27,7 +27,7 @@
         "weights": "400,700"
       }
     },
-    "colorSchema": "dark"
+    "colorSchema": "both"
   },
   "scripts": {
     "dev": "slidev example.md",
