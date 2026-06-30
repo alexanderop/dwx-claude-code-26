@@ -2672,8 +2672,6 @@ transition: fade-out
 
 # Wire it into the PR
 
-<div class="text-center text-sm op-70 mb-4">Every PR gets a fast pass. A <code style="color:#ff6bed">qa-verify</code> label — or an <code style="color:#ff6bed">@claude verify</code> comment — escalates to a deep, AC-driven run.</div>
-
 <div class="flex items-center justify-center gap-3 text-xs op-80 mb-5 flex-wrap">
   <span class="px-2 py-1 rounded bg-white/5">every PR → <b>fast</b> smoke pass</span>
   <span style="color:#ff6bed">·</span>
@@ -2688,16 +2686,15 @@ on:
   issue_comment: { types: [created] }                       # "@claude verify" → deep run
 
 steps:
-  - uses: anthropics/claude-code-action@v1     # headless claude — same flags as `claude -p`
+  - uses: anthropics/claude-code-action@v1
     with:
-      prompt: ${{ steps.prompt.outputs.value }}             # PR's Acceptance Criteria, injected
+      prompt: ${{ steps.prompt.outputs.value }}
       claude_args: |
-        --allowedTools "Bash,Write,Read,Glob,Grep"          # agent-browser runs via Bash
+        --allowedTools "Bash,Write,Read,Glob,Grep"
         --json-schema '${{ steps.schema.outputs.value }}'   # the contract — a committed file
         --append-system-prompt "$QA_SYSTEM_PROMPT"
 
-  - uses: actions/github-script@v9             # verdict → commit status:
-    # HEALTHY ✅ · MINOR_ISSUES ⏳ pending · CRITICAL_BUGS ❌ red check
+  - uses: actions/github-script@v9             # JSON verdict → commit status
 ```
 
 <SourceRef href="alexop.dev/posts/automated-qa-claude-code-agent-browser-cli-github-actions" />
@@ -2776,16 +2773,21 @@ TRANSITION: QA is a signal — even on every PR. A signal can be ignored. You st
 
 # The commit-time gate
 
-<div class="text-center text-sm op-70 mb-4">A Git hook runs lint, types, and dead-code checks before bad code reaches the branch.</div>
+<div class="text-center text-sm op-70 mb-4">One command — lint, types, and dead-code — wired into a Git hook so bad code never reaches the branch.</div>
 
-```bash {2|3|4|all}
-# .husky/pre-commit — bad code never reaches main
-pnpm lint        # oxlint → eslint → markdownlint
-pnpm type-check  # vue-tsc --build (project references)
-pnpm knip        # dead code, unused exports & deps
+```jsonc {2-6|3|4|5|all}
+// package.json — one command, run everywhere (hook + CI)
+"scripts": {
+  "lint": "oxlint && eslint && markdownlint .",   // lint
+  "type-check": "vue-tsc --build",                // types (project refs)
+  "knip": "knip",                                 // dead code, unused exports & deps
+  "check": "pnpm lint && pnpm type-check && pnpm knip"
+}
 ```
 
-```bash
+```bash {1-2|3-4}
+# .husky/pre-commit — bad code never reaches main
+pnpm check
 # .husky/commit-msg — Conventional Commits, enforced
 # ^(feat|fix|docs|refactor|perf|test|build|ci|chore|revert)(\(scope\))?!?: .+
 ```
@@ -2794,7 +2796,8 @@ pnpm knip        # dead code, unused exports & deps
 [pause]
 
 15 layers are signals. The pre-commit hook is the GATE. Bad code doesn't reach
-main. Full stop. Lint, types, and dead-code (knip) on every commit — plus a
+main. Full stop. One command — `pnpm check` — bundles lint, types, and dead-code
+(knip), so the agent runs ONE thing and CI runs the exact same thing. Plus a
 commit-msg hook enforcing Conventional Commits so the history stays machine- and
 agent-readable.
 
